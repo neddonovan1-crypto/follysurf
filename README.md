@@ -1,43 +1,58 @@
 # Folly Surf
 
-**A free surf-conditions dashboard for Folly Beach, South Carolina.**
+**Vibe coded.** Built with AI coding assistants. The source, tests and development documentation are published here.
 
-[Open the dashboard](https://follysurf.com/dashboard/) · [Read the scoring method](https://follysurf.com/dashboard/formula.html)
+[Development guide](DEVELOPMENT.md) · [Source release notes](SOURCE_RELEASE.md)
 
-Folly Surf brings waves, wind, tides and coastal observations into one place. It is built around a practical question: what do the available conditions suggest about a trip to the beach?
+A free, noncommercial Folly Beach conditions dashboard at [follysurf.com](https://follysurf.com). The live application runs on Cloudflare Workers.
 
-## What it does
+## Features
 
-- Combines nearshore wave forecasts, regional breaking-surf guidance, weather, tides and offshore buoy observations.
-- Shows current offshore wave energy, primary and secondary swell direction, and the age of the underlying observations.
-- Offers camera views and travel-time estimates to the Pier and the Washout.
-- Explains the **Folly Index**, a 0–100 surf-conditions heuristic, with a published formula and visible treatment of missing data.
+- Original Folly Index v4, regional NWS breaking-surf guidance, NOAA NWPS nearshore forecasts, local weather, tides and offshore observations. Missing inputs remain explicit; no simulated current conditions.
+- Forecast views use available provider coverage: currently about ten days of wave data and sixteen days of weather. NWPS heights are significant wave height, not breaking-wave face height; NWS guidance covers Charleston County beaches.
+- **Current Wave Mix** shows measured offshore energy shares across three period groups, with an expandable spectral chart. Edisto buoy measurements describe offshore conditions, not beach quality.
+- The compass shows separate primary and secondary offshore swell arrows from the same MFWAM forecast via Open-Meteo, with height, model-mean period and incoming bearing. Missing or stale components have no arrow. This display does not change the Folly Index or replace the nearshore forecast.
+- NOAA Charleston harbor wind and water-level observations retain their station, timestamps, units, datum and quality flags. They do not replace Folly beach measurements or change the index.
+- Camera views, tide inspection and traffic estimates for fixed origins and Pier/Washout destinations. Traffic refreshes every ten minutes while visible and excludes parking time.
+- Immutable private R2 archives preserve forecasts, prospective rating snapshots and coastal/spectral observations. History and offshore verification endpoints expose their timestamps and limitations. Scheduled collection runs on a six-hour UTC schedule; the dashboard checks a saved success heartbeat before reporting unattended collection active.
+- Offline survey import and independent observation evaluation tools. The survey import contains 925,274 points across twelve exports; no custom sandbar model or fitted surf-quality correction is claimed.
 
-## How to use it
+## Source layout
 
-1. Open the dashboard and compare the forecast periods.
-2. Check waves, wind and tides alongside the index.
-3. Inspect source timestamps and gaps before relying on a reading.
-4. Use the published method to understand how the score was produced.
+`web/` is the canonical browser source. `server/` contains portable ESM ingestion, scoring-support, traffic, archival and evaluation logic. `app/api/` exposes endpoints through Vinext. `vite.cloudflare.config.ts` and `build/cloudflare-worker.ts` configure Cloudflare. `npm run prepare:web` copies browser assets to generated `public/dashboard/`; use the development server or deployed application to view the dashboard.
 
-## Data and method
+The separate [camera sampling Worker](camera-service/BROWSER-SAMPLING.md) uses Browser Run and private storage. Offline research tools and their historical comparison models remain under `research/` and `scripts/`; they are not alternative production scorers.
 
-The dashboard draws on NOAA and National Weather Service observations and guidance, with forecast data from Open-Meteo. It distinguishes offshore measurements, nearshore wave forecasts and regional breaking-surf guidance; they describe different things.
+## Development
 
-The Folly Index is provisional and has not been calibrated against independent beach observations. It is a planning aid, not a safety score. Missing inputs remain visible rather than being replaced with simulated current conditions.
+Use Node 22.13 or newer:
 
-## Technical overview
+```sh
+npm ci
+npm run check
+npm test
+npm run build
+npm run dev
+```
 
-The application uses browser JavaScript, portable ESM server modules and Cloudflare Workers. Server-side components handle ingestion, traffic estimates and forecast archives. The dashboard publishes the method alongside the result so visitors can inspect its assumptions.
+`npm run start` serves the built Worker locally. `npm run prepare:web` regenerates browser assets separately. See [DEPLOY-CLOUDFLARE.md](DEPLOY-CLOUDFLARE.md) for production deployment and verification.
 
-## About this repository
+## Configuration and privacy
 
-This is the public project showcase for Folly Surf. The production source and deployment configuration are maintained separately in a private repository. There is no runnable application or installation step in this repository.
+Forecast sources need no private key. Traffic uses the server-side `TOMTOM_API_KEY` secret; optional Google fallback uses `GOOGLE_MAPS_API_KEY`. Never put keys in browser code, Git or build logs. There is no analytics or device-location collection. Traffic responses are not persisted in the forecast archive.
 
-The site is free and noncommercial. Forecast data and camera media remain subject to their providers' rights and terms.
+Each TomTom refresh currently makes four geocoding and three routing requests. Provider quotas and terms apply; check [TomTom pricing](https://docs.tomtom.com/pricing) and [Google Routes policies](https://developers.google.com/maps/documentation/routes/policies) before changing traffic usage. Open-Meteo's hosted free service is for noncommercial use and has request limits; attribution and CC BY 4.0 appear in the dashboard.
 
-## Feedback
+## Method and evidence
 
-[Open an issue](https://github.com/neddonovan1-crypto/follysurf/issues) with the page, approximate time and behaviour you observed, or suggest a useful improvement.
+The Folly Index v4 is an original 0–100 heuristic: nearshore wave-height preference, a 50/50 blend of v2’s linear peak-period preference and v3’s seven-second plateau, and a single wind/gust response. All coefficients remain provisional. Missing modifiers produce possible ranges without a rating band; missing core inputs withhold the score. Mean period is never substituted for peak period. The formula is not calibrated against independent beach observations and is not a safety score.
 
-Created by [Ned Donovan](https://neddonovan.co).
+The complete method is [web/formula.html](web/formula.html), published at [/dashboard/formula.html](https://follysurf.com/dashboard/formula.html), with MIT-licensed implementation in `web/outlook.js`. Provider data and camera media retain their own rights and terms.
+
+[Research evidence](research/FOLLY-EVIDENCE.md), [survey provenance](research/surveys/README.md) and the [observation evaluation workflow](research/observations/README.md) document implemented tools and remaining limits. Historical profiles do not establish present-day sandbars; offshore verification does not establish breaking-surf accuracy. Forecast freshness and cached-source timestamps remain visible, and interface dates use Eastern time with DST.
+
+The [nearshore-to-surf study](research/NEARSHORE-TO-SURF.md) distinguishes NOAA wave transformation from unvalidated spot rideability. Run `node scripts/compare-folly-index.mjs` for reproducible v2/v3/v4 examples and sensitivity checks; these are formula diagnostics, not validation.
+
+The archival input is the pinned [Folly size-and-period experiment summary](research/models/archive-evidence.json), saved October 21, 2026. Its 105 timed reports and 101 Edisto matches are discovery evidence, not a held-out validation set or historical NWPS replay. V3’s seven-second plateau was an experimental choice informed by that study. V4 moderates it with the agreed equal blend; neither the curves nor the blend are fitted relationships between nearshore waves and rideable surf.
+
+[Incoming-wave research](research/waves/README.md) adds prospective NOAA directional spectra at three explicitly regional points, raw archival retention, and an offline event-holdout comparison of period curves, local approach angle and spectral features. `/api/wave-spectra` exposes collection/archival status. No additional multiplier changes the public score; the study awaits independent matched observations.

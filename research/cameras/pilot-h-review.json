@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "kind": "camera-research-review",
+  "analysisRunId": "pilot-20261021-h-tides-pier",
+  "sourceCaptureRunId": "pilot-20261021-g-tides-pier",
+  "cameraId": "tides-pier",
+  "reviewDate": "2026-10-21",
+  "reviewer": "assistant-visual-review",
+  "reviewStatus": "rejected-for-scoring",
+  "scoreEligible": false,
+  "sourceTimeVerified": false,
+  "evidenceFrameIds": ["frame-0001", "frame-0156"],
+  "findings": [
+    "The first and last original capture images show substantial camera movement: the pier changes from spanning the frame to occupying its left side, with changes in shoreline framing and foreground.",
+    "The model incorrectly labeled viewChange as stable and supplied shape=mixed. Its shape result is not approved.",
+    "The earlier analysis of this same batch was rejected for shape evidence associated with a changing or uncertain view. The differing responses demonstrate that model-only view-change classification is insufficient.",
+    "Capture transport is verified: 36 unique frames over 155.321 seconds, zero measured request lateness, and the original clocks and pixels were preserved for reanalysis.",
+    "Moving playback and changing images do not independently verify live source time."
+  ],
+  "reviewedOverrides": {"viewChange": "pan-or-zoom", "shape": "unknown", "shapeEvidenceIds": []},
+  "requiredBeforeScoring": ["Independent camera movement detection or verified stable view", "Verified source freshness", "Calibration and independent observation-quality evaluation"]
+}

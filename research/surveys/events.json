@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "folly-nourishment-2024",
+      "type": "beach-nourishment",
+      "location": "Folly Beach, South Carolina",
+      "start": "2024-03",
+      "end": "2024-10",
+      "datePrecision": "month",
+      "reportedPlacedVolume": 1700000,
+      "volumeUnit": "cubic yard",
+      "sourceTitle": "Federal projects help protect South Carolina's coastline",
+      "sourcePublisher": "USACE Charleston District",
+      "sourcePublicationDate": "2025-05-20",
+      "sourceUrl": "https://www.sac.usace.army.mil/Media/News-Stories/Article/4193231/federal-projects-help-protect-south-carolinas-coastline/",
+      "evidenceType": "official completed-project retrospective",
+      "geometryStatus": "event record only; no surveyed placement footprint",
+      "interpretation": "Potential change in beach geometry. This record establishes neither an improvement nor a deterioration in surf quality."
+    }
+  ]
+}

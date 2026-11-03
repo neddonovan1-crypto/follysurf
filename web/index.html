@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#173e47"><meta name="description" content="Wave forecasts, wind, NOAA tides, local cameras and driving routes for Folly Beach, South Carolina.">
+<title>Folly Surf — Forecast, tides & traffic</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="history.css">
+<link rel="stylesheet" href="tide-inspection.css"><link rel="stylesheet" href="compass.css"><link rel="stylesheet" href="spectra.css">
+</head>
+<body>
+<a class="skip-link" href="#forecast">Skip to forecast</a>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="#" aria-label="Folly Surf home"><img class="brand-wordmark" src="folly-surf-wordmark.png" width="160" height="76" alt="Folly Surf" fetchpriority="high"></a>
+<nav aria-label="Main navigation"><a class="nav-active" href="#forecast">Forecast</a><a href="#tides">Tides</a><a href="#traffic">Traffic</a></nav>
+<div class="header-actions"><button id="units" class="unit-button" aria-label="Change units to metric">°F / ft</button></div>
+</div></header>
+<main>
+<div class="location-line"><span><span class="location-dot"></span> FOLLY BEACH, SOUTH CAROLINA</span><span id="local-date">America / New York</span></div>
+<div class="page-heading"><h1>Surf Outlook</h1><a href="https://forecast.weather.gov/product.php?site=CHS&amp;issuedby=CHS&amp;product=SRF&amp;format=TXT&amp;version=1&amp;glossary=0" target="_blank" rel="noopener noreferrer" class="text-button">NWS regional surf forecast ↗</a></div>
+<section id="cameras" class="camera-links" aria-label="Local cameras"><span class="camera-links-label">Check the cameras</span><a href="https://surfwashout.com/" target="_blank" rel="noopener noreferrer"><strong>The Washout Camera</strong><span>SurfWashout</span><span aria-hidden="true">↗</span></a><a href="https://www.tidesfollybeach.com/surf-cam/" target="_blank" rel="noopener noreferrer"><strong>Folly Beach Pier Camera</strong><span>Tides Folly Beach</span><span aria-hidden="true">↗</span></a></section>
+<div id="feed-status" class="feed-status" role="status"><span class="status-dot"></span><span id="status-text">Loading the latest forecasts…</span><button id="refresh" aria-label="Refresh forecast"><span aria-hidden="true">↻</span> Refresh</button></div>
+<div id="error-panel" class="error-panel" hidden></div>
+<section id="surf-outlook" class="conditions-board" aria-label="Selected day surf outlook">
+<div class="outlook-day-heading"><div id="outlook-days" class="outlook-days" role="group" aria-label="Choose surf outlook day"><button type="button" data-outlook-day="today" aria-pressed="true" aria-controls="outlook-content">Today</button><button type="button" data-outlook-day="tomorrow" aria-pressed="false" aria-controls="outlook-content">Tomorrow</button></div><p id="outlook-day-context" class="outlook-day-context" role="status">Today · current forecast</p></div>
+<div id="outlook-content">
+<div class="conditions-grid conditions-balanced">
+<article class="surf-summary">
+<div class="board-label index-heading"><span>FOLLY INDEX <button class="info-button" data-open-method aria-label="How the Folly Index is calculated">i</button></span><small>Modeled surf potential</small></div>
+<div class="outlook-result"><span id="outlook-score" class="outlook-score">—</span><span class="outlook-scale">/ 100</span></div><div id="outlook-rating" class="outlook-rating" aria-live="polite">Loading conditions</div>
+<div id="outlook-meter" class="outlook-meter" data-level="0" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+<p id="outlook-reason" class="outlook-reason">Loading wave and wind forecasts…</p><p id="outlook-confidence" class="outlook-confidence"></p>
+<div class="today-window"><span id="today-window-label" class="board-label">TODAY’S BEST WINDOW</span><strong id="today-window-time">Checking daylight hours…</strong><span id="today-window-basis" class="window-rating"></span></div>
+<div class="surf-number-row"><div><div class="board-label">REGIONAL BREAKING SURF</div><div class="surf-height"><span id="now-wave">—</span> <span class="height-unit">ft</span></div></div><svg id="surf-mark" class="surf-mark" viewBox="0 0 90 64" aria-hidden="true" hidden></svg></div>
+<p id="surf-scope" class="board-note">NWS · Charleston County beaches, including Folly</p><p id="surf-issued" class="source-time">Waiting for the NWS forecast</p><span id="now-label" class="source-time"></span>
+<a class="rip-risk" href="https://www.weather.gov/beach/chs" target="_blank" rel="noopener noreferrer"><span id="rip-risk">Rip current risk (NWS): —</span></a>
+</article>
+<article class="nearshore-panel">
+<div class="nearshore-top"><span class="board-label">NEARSHORE GUIDANCE</span><div id="nearshore-areas" class="nearshore-areas" role="group" aria-label="Nearshore forecast area"><button type="button" data-nearshore-area="pier" aria-pressed="true" aria-controls="nearshore-chart outlook-rating">Pier</button><button type="button" data-nearshore-area="washout" aria-pressed="false" aria-controls="nearshore-chart outlook-rating">Washout</button><button type="button" data-nearshore-area="west" aria-pressed="false" aria-controls="nearshore-chart outlook-rating">West Folly</button></div></div>
+<div class="nearshore-number"><strong id="nearshore-wave">—</strong><span class="height-unit">ft</span><span class="nearshore-period" id="nearshore-period">— s peak period</span></div>
+<div id="nearshore-chart" class="nearshore-chart"><div class="chart-empty"><span class="chart-empty-line"></span><span>Hourly guidance loading</span></div></div>
+<div class="nearshore-caption"><span id="nearshore-time-label">Next 24 hours · ET</span><span>Significant wave height</span></div>
+<div class="nearshore-meta"><span id="nearshore-point" class="board-note">NOAA nearshore forecast</span><span id="nearshore-source" class="source-time">Waiting for the latest model cycle</span></div>
+<div class="mini-tide"><div class="mini-tide-heading"><span class="board-label">NEXT TIDE</span><strong id="next-tide">—</strong></div><div id="mini-tide-chart" class="mini-tide-chart"><div class="chart-empty"><span>Tide curve loading</span></div></div><p id="next-tide-detail" class="board-note">NOAA · Folly River North</p></div>
+
+</article>
+<article class="wind-panel">
+<div class="wind-overview"><div><div class="board-label">LOCAL WIND</div><div class="wind-number"><span id="wind-value">—</span> <span class="speed-unit">mph</span></div><p id="wind-detail" class="board-note">Waiting for wind data</p></div>
+<div id="wind-compass" class="folly-compass"></div></div>
+
+</article>
+</div>
+<div class="conditions-details">
+<article><span class="board-label">OFFSHORE WAVES</span><div><strong id="offshore-wave">—</strong> <span class="height-unit">ft</span></div><p id="now-direction">— waves</p></article>
+<article data-current-observation><span class="board-label">WAVE PERIOD</span><div><strong id="observed-wave-period">—</strong> s</div><p>Dominant · Edisto buoy</p><p id="observed-wave-period-time">Waiting for observation</p></article>
+<article><span class="board-label">PRIMARY SWELL</span><div><strong id="swell-value">—</strong> <span class="height-unit">ft</span></div><p id="swell-detail">Waiting for swell data</p></article>
+<article><span class="board-label">AIR</span><div><strong id="air-value">—</strong><span class="temp-unit">°F</span></div><p id="air-detail">Modeled at Folly Beach</p></article>
+<article data-current-observation><span class="board-label">OFFSHORE WATER</span><div><strong id="buoy-water">—</strong><span class="temp-unit">°F</span></div><p id="buoy-water-time">Edisto buoy</p></article>
+</div>
+</div>
+</section>
+<div class="buoy-strip" aria-label="Offshore buoy observation"><div class="buoy-strip-title"><span class="observation-dot" aria-hidden="true"></span><a href="https://www.ndbc.noaa.gov/station_page.php?station=41004" target="_blank" rel="noopener noreferrer">Edisto buoy 41004 ↗</a><span class="buoy-distance">41 nautical miles southeast of Charleston</span></div><div class="buoy-strip-values"><strong><span id="buoy-wave">—</span> <span class="height-unit">ft</span></strong><span id="buoy-period">— s</span><span id="buoy-direction">—</span><span id="buoy-observed">Waiting for observation</span><span id="buoy-status" class="buoy-status">Unavailable</span></div></div>
+<section id="traffic" class="traffic-section" aria-labelledby="traffic-title">
+<div class="traffic-heading"><div><h2 id="traffic-title">Drive to Folly</h2><p>Live travel times to the beach</p></div><label class="destination-label">Destination<select id="traffic-destination"><option value="pier">Folly Beach Pier</option><option value="washout">The Washout</option></select></label></div>
+<div class="traffic-grid">
+<a class="traffic-card" data-congestion="unknown" data-route="downtown" data-origin="329 Meeting Street, Charleston, SC 29403" href="https://www.google.com/maps/dir/?api=1&amp;origin=Marion+Square%2C+Charleston%2C+SC&amp;destination=101+E+Arctic+Avenue%2C+Folly+Beach%2C+SC+29439&amp;travelmode=driving" target="_blank" rel="noopener noreferrer"><div><h3>Downtown Charleston</h3><p>Marion Square</p></div><div class="traffic-estimate"><strong class="traffic-duration">— minutes</strong><span class="traffic-delay">Estimate unavailable</span></div><div class="traffic-card-footer"><span class="traffic-updated">Not connected</span><span class="route-action">Directions ↗</span></div></a>
+<a class="traffic-card" data-congestion="unknown" data-route="mount-pleasant" data-origin="1218 Belk Drive, Mount Pleasant, SC 29464" href="https://www.google.com/maps/dir/?api=1&amp;origin=Mount+Pleasant+Towne+Centre%2C+Mount+Pleasant%2C+SC&amp;destination=101+E+Arctic+Avenue%2C+Folly+Beach%2C+SC+29439&amp;travelmode=driving" target="_blank" rel="noopener noreferrer"><div><h3>Mount Pleasant</h3><p>Towne Centre</p></div><div class="traffic-estimate"><strong class="traffic-duration">— minutes</strong><span class="traffic-delay">Estimate unavailable</span></div><div class="traffic-card-footer"><span class="traffic-updated">Not connected</span><span class="route-action">Directions ↗</span></div></a>
+<a class="traffic-card" data-congestion="unknown" data-route="west-ashley" data-origin="Savannah Highway &amp; Magnolia Road, Charleston, SC" href="https://www.google.com/maps/dir/?api=1&amp;origin=Savannah+Highway+%26+Magnolia+Road%2C+Charleston%2C+SC&amp;destination=101+E+Arctic+Avenue%2C+Folly+Beach%2C+SC+29439&amp;travelmode=driving" target="_blank" rel="noopener noreferrer"><div><h3>West Ashley</h3><p>Avondale · Savannah Hwy / Magnolia Rd</p></div><div class="traffic-estimate"><strong class="traffic-duration">— minutes</strong><span class="traffic-delay">Estimate unavailable</span></div><div class="traffic-card-footer"><span class="traffic-updated">Not connected</span><span class="route-action">Directions ↗</span></div></a>
+</div><div class="traffic-footer"><div><p id="traffic-status">Live estimates require a connected traffic provider.</p><p class="traffic-baseline"><span id="traffic-baseline">Colours compare current traffic with the provider’s baseline.</span> <span id="traffic-updated"></span></p></div><a href="https://www.511sc.org/" target="_blank" rel="noopener noreferrer">SC 511 incidents & cameras ↗</a></div><div class="traffic-attribution"><span id="traffic-provider">Traffic provider not connected</span><span><a href="/terms">Terms</a> · <a href="/privacy">Privacy</a></span></div>
+</section>
+<section id="forecast" class="forecast-section" aria-labelledby="forecast-title">
+<div class="section-heading"><div><h2 id="forecast-title">Extended forecast</h2></div><button class="text-button" data-open-method>How to read this <span aria-hidden="true">↗</span></button></div>
+<p class="data-note" id="forecast-horizon">Offshore wave height · local wind · up to 16 days</p>
+<div id="days" class="day-grid" aria-label="Choose forecast day"><div class="empty-message">Your extended outlook is loading.</div></div>
+<p id="regional-day" class="regional-day">NWS regional breaking-surf range loading.</p>
+<div class="detail-card">
+<div class="detail-heading"><div><h3 id="selected-date">Hourly forecast</h3><p>Offshore waves & local wind <span class="dot-divider">·</span> All times Eastern</p></div><div class="chart-key"><span><i class="wave-key"></i> Wave height</span><span><i class="wind-key"></i> Wind speed</span></div></div>
+<div id="hourly-chart" class="hourly-chart"><div class="empty-message">Waiting for forecast data.</div></div>
+<div id="hour-detail" class="hour-detail" aria-live="polite"><span>Select an hour above for details.</span></div>
+<div class="forecast-footer"><span>All times Eastern</span><button id="table-toggle" class="text-button" aria-expanded="false" aria-controls="hourly-table">View hourly table <span>＋</span></button></div>
+<div id="hourly-table" class="table-wrap" hidden></div>
+</div>
+</section>
+<div class="lower-grid">
+<section id="tides" class="tide-card" aria-labelledby="tides-title"><div class="card-heading"><div><h2 id="tides-title">Tides</h2></div><span class="source-label">NOAA</span></div><p class="card-subtitle" id="tide-day-label">Tides for your selected day</p><div id="tide-chart" class="tide-chart"><div class="empty-message">Tide predictions are loading.</div></div><div id="tide-events" class="tide-events"></div><p class="data-note">NOAA · Folly River North</p></section>
+<section class="window-card" aria-labelledby="window-title"><h2 id="window-title">Best session window</h2><p class="window-date" id="window-date">Selected forecast day</p><div class="window-time" id="window-time">—</div><div id="window-stats" class="window-stats"></div><p id="window-description">Finding a consistent two-hour daylight outlook for your selected area.</p><div class="daylight"><span>☀ <span id="sunrise">Sunrise —</span></span><span>◒ <span id="sunset">Sunset —</span></span></div></section>
+</div>
+
+<section id="spectral-section" class="spectral-section" aria-labelledby="spectral-title"><div class="section-heading"><div><h2 id="spectral-title">Current Wave Mix</h2><p class="spectral-intro"><a href="https://www.ndbc.noaa.gov/station_page.php?station=41004" target="_blank" rel="noopener noreferrer">NOAA · Edisto buoy 41004 ↗</a></p></div><button type="button" class="text-button" data-spectral-refresh>Refresh ↻</button></div><p class="spectral-status" data-spectral-status role="status">Wave measurements load when this section comes into view.</p><div data-spectral-content></div></section>
+<section id="history" class="history-section" aria-labelledby="history-title">
+<div class="section-heading"><div><h2 id="history-title">Has the forecast changed?</h2><p class="history-intro">Compare earlier and latest offshore wave forecasts for the same time.</p></div></div>
+<div class="revision-controls"><label>Forecast for<select id="revision-target"><option value="">Waiting for forecast…</option></select></label><label>Compare with<select id="revision-lookback"><option value="today">Earlier today</option><option value="yesterday">Yesterday</option></select></label><button type="button" id="revision-refresh" class="text-button">Check again ↻</button></div>
+<p id="revision-status" class="revision-status" role="status">Loading wave forecasts…</p><div id="revision-cards" class="revision-cards"></div><button type="button" id="revision-more" class="text-button" hidden>Check more saved forecasts ↓</button>
+<p class="revision-note">Times shown in Eastern.</p>
+</section>
+
+</main>
+<footer><a class="footer-brand" href="#" aria-label="Folly Surf home"><img class="brand-wordmark" src="folly-surf-wordmark.png" width="128" height="61" alt="Folly Surf" loading="lazy"></a><div><p class="project-note">Folly Surf is a free, non-commercial project using publicly available environmental data and licensed services. Our rating formula is openly published. Source data and camera imagery remain subject to their providers’ licences and attribution requirements.</p>Wave & weather data by <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a><br>Tide predictions by <a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8666467" target="_blank" rel="noopener noreferrer">NOAA CO-OPS</a>. <a href="/terms">Terms & disclaimer</a> · <a href="/privacy">Privacy</a></div><button class="text-button" data-open-method>Sources & methods ↗</button></footer>
+<dialog id="method-dialog" aria-labelledby="method-title"><div class="dialog-heading"><div class="eyebrow">BEHIND THE FORECAST</div><button id="close-dialog" aria-label="Close data information">×</button></div><h2 id="method-title">Sources & methods</h2>
+<p>Folly Surf is a free, non-commercial project using publicly available environmental data and licensed services. Our rating formula is openly published. Source data and camera imagery remain subject to their providers’ licences and attribution requirements.</p>
+<h3>Folly Index</h3><p id="score-method">The Folly Index starts with nearshore wave height and peak period, then applies one combined wind and gust response. The provisional period factor blends our earlier curves equally, giving partial credit to shorter periods and reaching full credit at thirteen seconds. Calm wind cannot make up for weak waves. Bands are Low (0–19), Marginal (20–39), Fair (40–59), Promising (60–79) and Standout (80–100). These describe the modeled setup. Incomplete wind inputs produce a possible score range instead of a grade. <a href="/dashboard/formula.html">Read the formula and band definitions</a>.</p><p>The formula is experimental and has not been calibrated against observations of breaking waves at Folly. NOAA already models nearshore wave transformation; this score does not predict whether individual waves will peel or close out.</p>
+<h3>Waves & observations</h3><p><a href="https://www.weather.gov/chs/" target="_blank" rel="noopener noreferrer">NWS Charleston</a> provides regional breaking-surf and beach-hazard guidance. NOAA NWPS supplies nearshore wave height and peak period; <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> supplies offshore waves, swell and local weather. Wave heights describe the highest third of waves at their source location.</p><p><a href="https://www.ndbc.noaa.gov/station_page.php?station=41004" target="_blank" rel="noopener noreferrer">Edisto buoy 41004</a> measures waves and water temperature about 41 nautical miles southeast of Charleston.</p>
+<h3>Wind & tides</h3><p>Directions show where wind and waves come from. Wind labels use an approximate southeast-facing shoreline. Session windows compare two consecutive daylight hours using the Folly Index. If a complete index cannot be calculated, the window uses wind alone.</p><p><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8666467" target="_blank" rel="noopener noreferrer">NOAA station 8666467</a> predicts tides at Folly River North. Heights are above mean lower low water.</p>
+<details id="coastal-section" class="coastal-panel"><summary>Charleston coastal measurements</summary><div class="coastal-heading"><a href="https://tidesandcurrents.noaa.gov/stationhome.html?id=8665530" target="_blank" rel="noopener noreferrer">NOAA · Charleston 8665530 ↗</a><button type="button" class="text-button" data-coastal-refresh>Refresh ↻</button></div><p class="coastal-status" data-coastal-status role="status">Open to load coastal measurements.</p><div data-coastal-content></div></details>
+<h3>Traffic</h3><p>Estimates run from the named starting points to the selected destination. Colours compare traffic with the provider’s no-traffic duration for the same route. Directions open Google Maps; live estimates identify their provider on the page.</p>
+<h3>Freshness</h3><p>Forecasts refresh while the page is open. Source status below identifies fresh, cached or unavailable data. Issue and observation times are checked separately from download time. Traffic expires after ten minutes. All displayed times use Eastern time, including daylight saving time.</p><div id="source-status" class="source-status"></div>
+<h3>Forecast verification</h3><p>Forecast snapshots are saved for comparison with later observations at Edisto buoy. Scheduled collection runs every six hours; its last successful run is shown in the archive check.</p><button class="text-button" id="verify-button">Check archived offshore accuracy ↗</button><div id="verification-status" class="source-status">No accuracy result has been calculated in this view.</div>
+</dialog>
+<noscript><div class="noscript">Enable JavaScript to load forecasts. The camera and source links remain available.</div></noscript>
+<script type="module" src="app.js"></script>
+</body></html>
+

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "sourceArchiveSha256": "1a1edc05953e0580e2ce8857f699caa5f320cfa3d2312e19687b128e8121987f",
+  "checks": [
+    "Source archive SHA-256 matches the supplied expected checksum",
+    "All source schemas recognized with no dropped unknown columns",
+    "Every normalized row has a valid collection date and matching source year/day",
+    "All numeric coordinates, elevations and distances are finite",
+    "All source longitude/latitude pairs lie within the Folly review envelope",
+    "Horizontal projection confirmed from every .prj",
+    "Vertical datum assigned only from an explicit statement in that year's metadata",
+    "All source rows retained in normalized output"
+  ],
+  "pinnedInventoryChecked": true,
+  "pointCount": 925274,
+  "surveyCount": 12,
+  "transectSurveyCount": 371,
+  "latestSurveySamplePointCount": 4573,
+  "allSurveySamplePointCount": 51551,
+  "knownDatePitfall": {
+    "exportYear": 2014,
+    "collectionDates": [
+      "2013-10-03"
+    ]
+  },
+  "explicitVerticalDatumSurveys": [
+    "scdes-folly-export-2015",
+    "scdes-folly-export-2016"
+  ],
+  "unconfirmedVerticalDatumSurveys": [
+    "scdes-folly-export-2014",
+    "scdes-folly-export-2017",
+    "scdes-folly-export-2018",
+    "scdes-folly-export-2019",
+    "scdes-folly-export-2020",
+    "scdes-folly-export-2021",
+    "scdes-folly-export-2022",
+    "scdes-folly-export-2023",
+    "scdes-folly-export-2024",
+    "scdes-folly-export-2025"
+  ],
+  "scientificValidation": "Not evaluated: current sandbar geometry, wave transformation, breaking height or surfing quality"
+}

@@ -1,0 +1,39 @@
+name: Check Folly Surf
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      WRANGLER_SEND_METRICS: "false"
+      CLOUDFLARE_CF_FETCH_ENABLED: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install pinned dependencies
+        run: npm ci
+      - name: Check source
+        run: npm run check
+      - name: Test forecast and traffic handling
+        run: npm test
+      - name: Test survey import and provenance
+        run: python3 -m unittest discover -s research/surveys -p 'test_*.py' -v
+      - name: Build standalone Cloudflare Worker
+        run: node scripts/build-cloudflare.mjs
+      # Validation needs no provider or Cloudflare credentials. The configured
+      # production repository handles live deployment separately.

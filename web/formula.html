@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#173e47"><meta name="description" content="The complete, open-source Folly Index v4 formula: inputs, equations, rating bands and source data."><title>Folly Index — Full formula | Folly Surf</title>
+<style>
+:root{color-scheme:light;--ink:#173e47;--muted:#5d716d;--paper:#f6f5ef;--line:#daddd1;--green:#427865}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.75 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:860px;margin:auto;padding:32px 28px 70px}a{color:#286452;text-underline-offset:3px}a:hover{color:#173e47}a:focus-visible{outline:3px solid #dc714d;outline-offset:4px}header{border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:28px}.back{font-size:14px}.eyebrow{font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--green);margin:29px 0 7px}h1{font-size:clamp(34px,7vw,48px);line-height:1.15;letter-spacing:-1.5px;margin:0 0 12px}h2{font-size:25px;line-height:1.3;letter-spacing:-.5px;margin:36px 0 10px}h3{font-size:18px;margin:26px 0 8px}p{margin:10px 0}li{margin:8px 0}.lede{font-size:19px;max-width:700px;color:var(--muted)}.formula{padding:16px 18px;border:1px solid var(--line);border-radius:8px;background:#fffefa;overflow-x:auto;font:14px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;vertical-align:top;padding:11px 13px;border-bottom:1px solid var(--line)}th{background:#e8edde;font-weight:650}td:first-child{white-space:nowrap}small,.muted{color:var(--muted)}footer{border-top:1px solid var(--line);padding-top:20px;margin-top:40px;font-size:13px}nav{display:flex;gap:10px 22px;flex-wrap:wrap;font-size:13px;margin-top:20px}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.9em}@media(max-width:560px){body{font-size:15px}main{padding:22px 18px 45px}h2{font-size:22px}.lede{font-size:17px}th,td{padding:9px 8px}.formula{font-size:12px;padding:13px}}
+</style></head><body><main>
+<header><a class="back" href="/">← Folly Surf</a><p class="eyebrow">Open formula · Version 4</p><h1>The Folly Index</h1><p class="lede">A 0–100 summary of modeled surf potential, built from nearshore waves and local wind.</p><nav aria-label="On this page"><a href="#inputs">Inputs</a><a href="#formula">Exact formula</a><a href="#bands">Bands</a><a href="#missing">Missing data</a><a href="#validation">Validation</a></nav></header>
+<p>The Folly Index combines nearshore wave height, peak period and local wind into a single score. Higher scores favour moderate waves, longer peak periods and lighter, better-aligned winds. The implementation and full formula are open source.</p>
+
+<section id="inputs"><h2>Inputs and source basis</h2><div class="table-wrap"><table><thead><tr><th>Symbol</th><th>Input</th><th>Source and meaning</th></tr></thead><tbody>
+<tr><td>H</td><td>Nearshore significant wave height, metres</td><td>Modeled significant wave height at the selected NOAA NWPS point near the five-metre depth contour.</td></tr>
+<tr><td>Tp</td><td>Peak wave period, seconds</td><td>Peak period at the same NWPS point and forecast hour.</td></tr>
+<tr><td>V</td><td>Wind speed, mph</td><td>Current local Open-Meteo forecast hour.</td></tr>
+<tr><td>D</td><td>Wind direction, degrees</td><td>The direction the wind comes <em>from</em>, clockwise from north. A representative offshore bearing of 315° is used for Folly.</td></tr>
+<tr><td>U</td><td>Wind gust, mph</td><td>The matching local weather forecast hour.</td></tr>
+</tbody></table></div>
+<p>The score uses nearshore significant wave height and peak period from the selected Folly area, paired with local wind and gusts for the same hour. Offshore waves and breaking-surf reports are displayed separately.</p>
+<p>NWPS forecasts must be within 18 hours of their model cycle, and weather data within six hours. Both must cover the current forecast hour. Cached data remain usable within those limits, with their status shown. Age is measured from issue time when available, otherwise retrieval time.</p>
+</section>
+<section id="formula"><h2>The exact formula</h2><p>Let <code>clamp(x) = min(1, max(0, x))</code>. All three factors lie between zero and one:</p>
+<pre class="formula">Q = round(100 × A × P × W)</pre>
+<p>The three factors multiply together. Wave height and period set the potential; the combined wind and gust response adjusts it for surface conditions.</p>
+<h3>1. Moderate-wave preference: A</h3>
+<pre class="formula">If H ≤ 1.2 m:       A = clamp(H / 1.2)
+If 1.2 &lt; H ≤ 1.8 m: A = 1
+If H &gt; 1.8 m:       A = clamp(1 − (H − 1.8) / 3)</pre>
+<p>The factor reaches one at 1.2 m, stays there through 1.8 m and falls to zero at 4.8 m.</p>
+<h3>2. Peak-period preference: P</h3>
+<pre class="formula">Pold = clamp((Tp − 3) / 10)
+x = clamp((Tp − 3) / 4)
+Pplateau = x² × (3 − 2x)
+P = 0.5 × Pold + 0.5 × Pplateau</pre>
+<p>Version 4 averages two period factors: v2’s linear curve and v3’s seven-second plateau. The two factors receive equal weight. The size and wind factors remain unchanged.</p>
+<div class="table-wrap"><table><thead><tr><th>Peak period</th><th>Old factor</th><th>Plateau factor</th><th>Current blend</th></tr></thead><tbody>
+<tr><td>3 s</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>6 s</td><td>0.3</td><td>0.84375</td><td>0.571875</td></tr>
+<tr><td>7 s</td><td>0.4</td><td>1</td><td>0.7</td></tr>
+<tr><td>8 s</td><td>0.5</td><td>1</td><td>0.75</td></tr>
+<tr><td>10.9 s</td><td>0.79</td><td>1</td><td>0.895</td></tr>
+<tr><td>13 s and above</td><td>1</td><td>1</td><td>1</td></tr>
+</tbody></table></div>
+<p>The blend gives 6–8-second periods more credit than v2 while retaining a gradual increase beyond seven seconds. It reaches one at thirteen seconds and stays there for longer periods.</p>
+<p>For the rounded Pier inputs discussed on October 21, 2026—3.1 ft nearshore significant height, 10.9 s peak period, 10 mph wind from 17° and 13 mph gusts—v2 gives 46, v3 gives 61 and v4 gives 55.</p>
+<h3>3. Wind and gust response: W</h3>
+<p>Let <code>δ</code> be the smallest circular difference between D and 315°, from 0° to 180°. Define a wind input E and alignment o:</p>
+<pre class="formula">E = max(V, 0.7 × U)
+o = (1 − cos(δ × π / 180)) / 2
+W = clamp(1 − E × (0.012 + 0.040 × o)
+            − max(0, E − 12) × 0.025)</pre>
+<p>Northwest wind has <code>o = 0</code>; southeast wind has <code>o = 1</code>. Other directions vary continuously. All directions lose points as E rises, with a stronger penalty above 12 mph. Gusts change E only when 70% of the gust exceeds sustained speed.</p>
+<p>V2 multiplied sustained-wind and gust factors and applied a gust ceiling. V3 introduced one wind response, retained in v4, to reduce overlapping penalties.</p>
+</section>
+<section id="bands"><h2>What the bands mean</h2><div class="table-wrap"><table><thead><tr><th>Score</th><th>Band</th><th>Reading</th></tr></thead><tbody>
+<tr><td>0–19</td><td>Low</td><td>The modeled ingredients provide little potential.</td></tr>
+<tr><td>20–39</td><td>Marginal</td><td>One or more ingredients substantially limit the setup.</td></tr>
+<tr><td>40–59</td><td>Fair</td><td>Some potential, with meaningful limitations.</td></tr>
+<tr><td>60–79</td><td>Promising</td><td>Waves and wind align favourably.</td></tr>
+<tr><td>80–100</td><td>Standout</td><td>A strong combination of waves and wind.</td></tr>
+</tbody></table></div><p>The five bands divide the 0–100 score into equal intervals.</p></section>
+<section id="missing"><h2>Missing, inconsistent or stale inputs</h2><ul>
+<li>Missing or invalid nearshore height, non-positive peak period, missing wind speed, or unusable core sources produce no score.</li>
+<li>At sustained wind speeds of 3 mph or above, missing direction produces neither a score nor a range. Below 3 mph, missing direction produces a possible range. Direction becomes irrelevant only when both sustained wind and usable gusts are zero.</li>
+<li>Missing or invalid gust data produce a range, not a score or band. Gusts are also unavailable when <code>U + 1 &lt; V</code>; the 1 mph tolerance accommodates small source inconsistencies.</li>
+</ul><p>With usable gusts, calculate E normally. If direction is unknown, Wbest uses <code>o = 0</code> and Wworst uses <code>o = 1</code>. With known direction, both use the supplied alignment.</p>
+<pre class="formula">Known gusts, unknown light-wind direction:
+minimum = round(100 × A × P × Wworst)
+maximum = round(100 × A × P × Wbest)
+
+Unknown or inconsistent gusts:
+minimum = 0
+maximum = round(100 × A × P × Wbest evaluated at E = V)
+
+In either case: score = unavailable; band = unavailable</pre>
+<p>For unknown gusts, the upper endpoint uses the supplied direction if available, otherwise the best alignment. The lower endpoint allows a gust large enough to reduce W to zero. Wind direction remains part of the calculation when gusts are present or unknown.</p>
+</section>
+<section id="nearshore"><h2>Nearshore modeling</h2><p>NOAA NWPS accounts for shoaling, refraction, depth-induced breaking, wind forcing and other wave processes. The Folly Index uses the resulting nearshore height and peak period directly. Its factors rank that modeled setup.</p><p>The five-metre contour identifies the water depth of the forecast points. Our <a href="https://github.com/neddonovan1-crypto/folly-surf/blob/main/research/NEARSHORE-TO-SURF.md">research notes</a> cover the model sources, local bathymetry and observation study.</p></section>
+<section><h2>Other information on the dashboard</h2><p>Offshore swell, approach direction, tide height and stage, Edisto buoy measurements, temperature, daylight, traffic and cameras provide additional context. The score uses only the nearshore wave and local wind inputs listed above. NWS rip-current risk and beach alerts are displayed separately.</p></section>
+<section id="archive"><h2>What the archival reports add</h2><p>Our reviewed archive contains 105 timed beach reports with 101 matched Edisto buoy wave records. Of 17 matched reports explicitly tagged “fun,” 11 had offshore dominant periods below eight seconds. The “fun” and “weak” groups both had a median period of 7.69 seconds. Four reports described waves as both weak and longboardable. These findings support examining the old period penalty and keeping board suitability separate from wave power.</p><p>V4 retains the original size curve and incorporates the revised period preference. The archival study and source details are in our <a href="https://github.com/neddonovan1-crypto/folly-surf/blob/main/research/NEARSHORE-TO-SURF.md">research notes</a>.</p></section>
+<section id="validation"><h2>Observation and refinement plan</h2><p>Our target is worthwhile surf at a named Folly spot for a specific board and skill level. The next stage pairs forecasts with beach observations to refine the score:</p><ol>
+<li>Collect timestamped, independent beach observations at named Folly locations, including wave quality, observed size, wind, tide, sandbar context and a consistent observer rubric.</li>
+<li>Preserve the forecast available before each observation, with its issue time, retrieval time and formula version.</li>
+<li>Group observations by swell or weather event, then keep entire events out of calibration. Evaluate on those held-out events.</li>
+<li>Compare the index with simple baseline rules and report sample counts, missing-data rates, band confusion, variation between observers and results by location and season. Use uncertainty estimates that respect event grouping.</li>
+<li>Compare v4, archived v2 and v3, a simple height-and-wind baseline and a period-free variant. Test whether period, angle and tide improve predictions on held-out events. Publish the results and evaluate fitted changes on a further set of independent events.</li>
+</ol></section>
+<section><h2>Public foundations</h2><p>These sources describe the wave variables, model physics and local surf context behind the index.</p><ul>
+<li><a href="https://www.weather.gov/marine/WaveDetail">NWS wave detail</a> — definitions of wave height, period and direction.</li>
+<li><a href="https://www.ndbc.noaa.gov/waveobs.shtml">NDBC wave observations</a> and <a href="https://www.ndbc.noaa.gov/faq/wavecalc.shtml">wave calculations</a> — definitions and spectral wave measurements, including period statistics.</li>
+<li><a href="https://polar.ncep.noaa.gov/nwps/">NOAA Nearshore Wave Prediction System</a> — the nearshore model source.</li>
+<li><a href="https://www.weather.gov/ilm/NWPS">NWS NWPS physics</a> — processes already represented in nearshore wave modeling.</li>
+<li><a href="https://www.islasurfschool-charleston.com/journal/2019/10/29/what-you-should-know-about-swell-periods-and-direction">Isla Surf School’s local period guidance</a> — local guidance on swell period and direction.</li>
+<li><a href="https://www.islasurfschool-charleston.com/journal/2022/9/28/understanding-a-surf-forecast-101-surfline-edition">Isla’s 2022 forecast guide</a> — additional local context from the same school.</li>
+<li><a href="https://www.oceansurfshop.com/surf-report/tuesday-august-14/">Ocean Surf Shop, August 14, 2018</a> and <a href="https://www.oceansurfshop.com/surf-report/wednesday-august-15/">August 15, 2018</a> — reports on high-volume boards in small surf.</li>
+<li><a href="https://doi.org/10.3390/rs13173372">Thompson et al., wave peel tracking (2021)</a> — a study of video-based wave-peel measurements at Australian surf breaks.</li>
+<li><a href="https://open-meteo.com/en/docs">Open-Meteo weather documentation</a> — local wind and gust variables.</li>
+<li><a href="https://www.weather.gov/safety/ripcurrent">NWS rip-current safety</a> — rip-current guidance and beach hazards.</li>
+</ul></section>
+<footer><p><a href="./outlook.js">Read the implementation</a> · <a href="./FORMULA-LICENSE.txt">MIT licence</a> · <a href="/terms">Terms & disclaimer</a> · <a href="/">Back to the forecast</a></p><p>This page is the canonical full method document for Folly Index v4. The formula and our documentation are MIT-licensed; provider data, images, video and third-party software keep their own rights and terms.</p></footer>
+</main></body></html>

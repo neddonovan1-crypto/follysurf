@@ -1,0 +1,56 @@
+{
+  "instructions": "Replace nulls and placeholders with real, prospectively recorded values. This is an empty template, not observed data. Use pseudonymous observer IDs only. Freeze the plan and whole-event holdouts before collection.",
+  "plan": {
+    "schemaVersion": 1,
+    "planId": "REPLACE-WITH-IMMUTABLE-PLAN-ID",
+    "frozenAt": null,
+    "leadMinHours": 1,
+    "leadMaxHours": 24,
+    "locations": [
+      {
+        "id": "REPLACE-WITH-ARCHIVE-LOCATION-ID",
+        "latitude": null,
+        "longitude": null,
+        "matchRadiusM": 250
+      }
+    ],
+    "events": [
+      {
+        "id": "REPLACE-EVENT-ID",
+        "eventGroup": "REPLACE-PHYSICAL-SWELL-OR-STORM-ID",
+        "startAt": null,
+        "endAt": null,
+        "split": "holdout",
+        "nourishmentEra": "unknown"
+      }
+    ],
+    "formulaVersion": 4,
+    "protocol": "REPLACE-WITH-AGREED-OBSERVATION-PROTOCOL",
+    "sessionMinutes": 15
+  },
+  "observations": [],
+  "observationTemplate": {
+    "id": "REPLACE-UNIQUE-ID",
+    "eventId": "REPLACE-EVENT-ID",
+    "sessionId": "REPLACE-SHARED-SESSION-ID",
+    "observerId": "REPLACE-PSEUDONYMOUS-ID",
+    "locationId": "REPLACE-WITH-ARCHIVE-LOCATION-ID",
+    "latitude": null,
+    "longitude": null,
+    "observedAt": null,
+    "recordedAt": null,
+    "independent": true,
+    "blindToForecast": true,
+    "qualityScale": "folly-observer-v1",
+    "quality": null,
+    "boardClass": "REPLACE-AGREED-BOARD-CLASS",
+    "skillClass": "REPLACE-AGREED-SKILL-CLASS",
+    "height": {
+      "kind": "breaking-face-range",
+      "unit": "m",
+      "min": null,
+      "max": null
+    },
+    "durationMinutes": 15
+  }
+}

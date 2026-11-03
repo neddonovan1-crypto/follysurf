@@ -1,0 +1,58 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "folly-surf-camera-pilot",
+  "main": "worker.js",
+  "compatibility_date": "2026-10-21",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "browser": {
+    "binding": "BROWSER"
+  },
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    "PILOT_ENABLED": "true",
+    "PILOT_ID": "validation-20261023-25",
+    "PILOT_CAPTURE_ONLY": "true",
+    "PILOT_CAMERA": "tides-pier",
+    "PILOT_SAMPLING_MODE": "stationary",
+    "PILOT_VALIDATION_PLAN": "[{\"id\":\"validation-20261023-1005\",\"start\":\"2026-10-23T14:05:00Z\",\"end\":\"2026-10-23T14:20:00Z\"},{\"id\":\"validation-20261023-1405\",\"start\":\"2026-10-23T18:05:00Z\",\"end\":\"2026-10-23T18:20:00Z\"},{\"id\":\"validation-20261024-1005\",\"start\":\"2026-10-24T14:05:00Z\",\"end\":\"2026-10-24T14:20:00Z\"},{\"id\":\"validation-20261024-1405\",\"start\":\"2026-10-24T18:05:00Z\",\"end\":\"2026-10-24T18:20:00Z\"},{\"id\":\"validation-20261025-1005\",\"start\":\"2026-10-25T14:05:00Z\",\"end\":\"2026-10-25T14:20:00Z\"},{\"id\":\"validation-20261025-1405\",\"start\":\"2026-10-25T18:05:00Z\",\"end\":\"2026-10-25T18:20:00Z\"}]"
+  },
+  "triggers": {
+    "crons": [
+      "*/5 * * * *"
+    ]
+  },
+  "services": [
+    {
+      "binding": "ANALYSIS",
+      "service": "folly-surf",
+      "entrypoint": "CameraAnalysis"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "BUCKET",
+      "bucket_name": "folly-surf-forecasts"
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "CAPTURE",
+        "class_name": "CameraCapture"
+      }
+    ]
+  },
+  "exports": {
+    "CameraCapture": {
+      "type": "durable-object",
+      "storage": "sqlite"
+    }
+  }
+}
+

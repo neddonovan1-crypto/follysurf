@@ -1,0 +1,1023 @@
+{
+  "schemaVersion": 1,
+  "importer": "scripts/import-folly-surveys.py",
+  "importerVersion": 1,
+  "importerSha256": "a00732a23daa8156c7498568920e8bebf04e083175c3e02f345ec60c6376cc0c",
+  "datasetId": "scdes-berm-folly-beach",
+  "sourceUrl": "https://des.sc.gov/sites/des/files/Documents/GIS/FOLLY_BEACH.zip",
+  "sourceArchiveSha256": "1a1edc05953e0580e2ce8857f699caa5f320cfa3d2312e19687b128e8121987f",
+  "sourceArchiveBytes": 91504907,
+  "sourceAccessVerifiedDate": "2026-10-21",
+  "pinnedSnapshotMatched": true,
+  "pointCount": 925274,
+  "surveyCount": 12,
+  "transectSurveyCount": 371,
+  "sourceGeometryStatus": "observed-source-points",
+  "derivedGeometry": "Per-transect ranges and observed-point selection only; no interpolation, reprojection, vertical transformation, seabed raster or wave simulation",
+  "pointSchema": {
+    "columns": [
+      "survey_id",
+      "source_file",
+      "source_row",
+      "source_file_year",
+      "collection_date",
+      "source_collection_date",
+      "source_year",
+      "source_day_of_year",
+      "transect_id",
+      "monument",
+      "source_static_id",
+      "source_object_id",
+      "source_fid",
+      "location",
+      "beach",
+      "survey_type",
+      "easting_ft",
+      "northing_ft",
+      "elevation_ft",
+      "distance_from_monument_ft",
+      "distance_from_comparison_point_ft",
+      "source_dbl",
+      "longitude_deg",
+      "latitude_deg",
+      "vertical_datum",
+      "vertical_datum_status",
+      "geometry_status"
+    ],
+    "sourceFieldMap": {
+      "source_year": "year",
+      "source_day_of_year": "day",
+      "transect_id": "tran_id",
+      "monument": "monument",
+      "source_static_id": "static_id",
+      "source_object_id": "objectid",
+      "source_fid": "fid",
+      "location": "location",
+      "beach": "beach",
+      "survey_type": "survey",
+      "easting_ft": "easting",
+      "northing_ft": "northing",
+      "elevation_ft": "elevation",
+      "distance_from_monument_ft": "dfm",
+      "distance_from_comparison_point_ft": "dfcp",
+      "source_dbl": "dbl",
+      "longitude_deg": "point_x",
+      "latitude_deg": "point_y"
+    },
+    "sourceRow": "One-based CSV row number including the header; values preserve source numeric text",
+    "blankOptionalFields": "Not supplied by that annual export; never imputed",
+    "collectionDatePrecision": "day",
+    "sourceDbl": "Additional source DBL field in 2017; preserved without assigning a new interpretation"
+  },
+  "sample": {
+    "file": "profile-samples.csv.gz",
+    "pointCount": 4573,
+    "collectionDates": [
+      "2025-11-13"
+    ],
+    "binWidthFt": 25.0,
+    "method": "For each survey/date/transect, select the observed point nearest each DFCP bin centre, plus minimum/maximum elevation and DFCP; earliest source row breaks ties. Never interpolate.",
+    "purpose": "Compact review sample; use full normalized points for quantitative terrain work",
+    "sha256": "e9e6b2d03bfc4881844d8b69b7a3f8e5a842d9c5e0d9275cb4c970239dafae89"
+  },
+  "allSurveySample": {
+    "file": "all-profile-samples.csv.gz",
+    "pointCount": 51551,
+    "storage": "Full normalized bundle only",
+    "method": "Same observed-point selection as the compact sample, for every survey",
+    "sha256": "cb75fb3bb78c2442f9975ca54199870ed4cf9f1f7ca598c4769a95eb1ff5592e"
+  },
+  "distanceReference": "DFM is from the collection monument; DFCP is the source BERM comparison-point offset. Preserve monument identity and source FIELD_DEFINITIONS.txt when comparing years.",
+  "rights": "Public SC DES download; no explicit redistribution license identified. Preserve source attribution, metadata and accuracy disclaimers.",
+  "surveys": [
+    {
+      "surveyId": "scdes-folly-export-2014",
+      "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2014.csv",
+      "sourceFileYear": 2014,
+      "sourceCsvSha256": "bc2e8320535814ab7a98b733f6a9669ec2d124d746efd11ccdced2d87eb4078d",
+      "sourceFields": [
+        "FID",
+        "OBJECTID",
+        "Easting",
+        "Northing",
+        "Elevation",
+        "Monument",
+        "Year",
+        "Day",
+        "Location",
+        "COL_DATE",
+        "BEACH",
+        "TRAN_ID",
+        "DFM",
+        "DFCP",
+        "POINT_X",
+        "POINT_Y",
+        "STATIC_ID"
+      ],
+      "collectionDates": [
+        "2013-10-03"
+      ],
+      "pointCount": 118317,
+      "transectCount": 31,
+      "surveyTypes": {
+        "unspecified": 118317
+      },
+      "horizontalCrs": {
+        "name": "NAD83(2011) / South Carolina (international feet)",
+        "epsg": 6570,
+        "identification": "Identified from the supplied .prj parameters",
+        "horizontalUnit": "international foot",
+        "horizontalUnitToMetres": 0.3048,
+        "sourceWkt": "PROJCS[\"NAD_1983_2011_StatePlane_South_Carolina_FIPS_3900_Ft_Intl\",GEOGCS[\"GCS_NAD_1983_2011\",DATUM[\"D_NAD_1983_2011\",SPHEROID[\"GRS_1980\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic\"],PARAMETER[\"False_Easting\",2000000.0],PARAMETER[\"False_Northing\",0.0],PARAMETER[\"Central_Meridian\",-81.0],PARAMETER[\"Standard_Parallel_1\",32.5],PARAMETER[\"Standard_Parallel_2\",34.83333333333334],PARAMETER[\"Latitude_Of_Origin\",31.83333333333333],UNIT[\"Foot\",0.3048]]",
+        "geographicColumns": "Source POINT_X/POINT_Y longitude/latitude in degrees; their geographic CRS is not separately asserted by this importer"
+      },
+      "verticalReference": {
+        "datum": null,
+        "status": "unconfirmed",
+        "geoidModel": null,
+        "elevationUnit": "foot",
+        "unitEvidence": "Feet are the BERM program's published profile units; this year's vertical units were not separately confirmed",
+        "evidence": [],
+        "lineageHints": [],
+        "transformationApplied": false
+      },
+      "sourceMetadata": [
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2014.prj",
+          "sha256": "bbfb4810c1d18331cd5be562b07558a6fcb22cf8553c0d6887d83e1a43ddbc39",
+          "bytes": 525
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2014.shp.xml",
+          "sha256": "e98b79b56a0ced97b19d8dee5a7bd19a206e73503dd8e1da70d120f5bdacd4ec",
+          "bytes": 79822
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2014.txt.xml",
+          "sha256": "c41eb701356760b7465bbf2e3e6a93ea9bcb0cd9d9933c37e857ef8185cc73dc",
+          "bytes": 79822
+        }
+      ],
+      "warnings": [
+        "Export filename year differs from actual collection year; COL_DATE retained as authoritative.",
+        "Vertical datum unconfirmed: do not combine with water levels or another survey datum without confirmation."
+      ],
+      "normalizedFile": "scdes-folly-export-2014.csv.gz",
+      "normalizedSha256": "4557b4dc0b3ef34cc1a24785083a88ea45103d334433b47c10eb959d7eee0d4a",
+      "normalizedBytes": 5589786
+    },
+    {
+      "surveyId": "scdes-folly-export-2015",
+      "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2015.csv",
+      "sourceFileYear": 2015,
+      "sourceCsvSha256": "d75abd4f076ad4214e23ba12c428cb09162c79cdc0c66523481925637e088b03",
+      "sourceFields": [
+        "FID",
+        "OBJECTID",
+        "Location",
+        "Monument",
+        "Northing",
+        "Easting",
+        "Elevation",
+        "Year",
+        "Day",
+        "COL_DATE",
+        "BEACH",
+        "TRAN_ID",
+        "DFM",
+        "DFCP",
+        "POINT_X",
+        "POINT_Y",
+        "STATIC_ID"
+      ],
+      "collectionDates": [
+        "2015-11-13"
+      ],
+      "pointCount": 61251,
+      "transectCount": 31,
+      "surveyTypes": {
+        "unspecified": 61251
+      },
+      "horizontalCrs": {
+        "name": "NAD83(2011) / South Carolina (international feet)",
+        "epsg": 6570,
+        "identification": "Identified from the supplied .prj parameters",
+        "horizontalUnit": "international foot",
+        "horizontalUnitToMetres": 0.3048,
+        "sourceWkt": "PROJCS[\"NAD_1983_2011_StatePlane_South_Carolina_FIPS_3900_Ft_Intl\",GEOGCS[\"GCS_NAD_1983_2011\",DATUM[\"D_NAD_1983_2011\",SPHEROID[\"GRS_1980\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic\"],PARAMETER[\"False_Easting\",2000000.0],PARAMETER[\"False_Northing\",0.0],PARAMETER[\"Central_Meridian\",-81.0],PARAMETER[\"Standard_Parallel_1\",32.5],PARAMETER[\"Standard_Parallel_2\",34.83333333333334],PARAMETER[\"Latitude_Of_Origin\",31.83333333333333],UNIT[\"Foot\",0.3048]]",
+        "geographicColumns": "Source POINT_X/POINT_Y longitude/latitude in degrees; their geographic CRS is not separately asserted by this importer"
+      },
+      "verticalReference": {
+        "datum": "NAVD88",
+        "status": "explicit-source-metadata",
+        "geoidModel": "2012A CONUS",
+        "elevationUnit": "foot",
+        "unitEvidence": "International Survey feet in this year's XML",
+        "evidence": [
+          {
+            "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2015.shp.xml",
+            "text": "The vertical datum for all data is NAVD88 using the Geoid model 2012A CONUS with units in International Survey feet. The Ellipsoid used is WGS-84 and the projection is Lambert Conformal Conic"
+          },
+          {
+            "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2015.txt.xml",
+            "text": "The vertical datum for all data is NAVD88 using the Geoid model 2012A CONUS with units in International Survey feet. The Ellipsoid used is WGS-84 and the projection is Lambert Conformal Conic"
+          }
+        ],
+        "lineageHints": [],
+        "transformationApplied": false
+      },
+      "sourceMetadata": [
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2015.prj",
+          "sha256": "bbfb4810c1d18331cd5be562b07558a6fcb22cf8553c0d6887d83e1a43ddbc39",
+          "bytes": 525
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2015.shp.xml",
+          "sha256": "274113a818fdcab82980458e17b61b06c36d3c9b70e8816be28a812b4f32959c",
+          "bytes": 44670
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2015.txt.xml",
+          "sha256": "669dc1bc0d7dfa332a34c5c8473150056eb9ae37046898e81924759b9f212ac6",
+          "bytes": 44670
+        }
+      ],
+      "warnings": [],
+      "normalizedFile": "scdes-folly-export-2015.csv.gz",
+      "normalizedSha256": "3a8f33677f80088dad8a1cbc34b90e1dbac88e5a80fac797404c053f61d96e2d",
+      "normalizedBytes": 2970971
+    },
+    {
+      "surveyId": "scdes-folly-export-2016",
+      "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2016.csv",
+      "sourceFileYear": 2016,
+      "sourceCsvSha256": "674fe90f48a6cb6b9b845895456b83f0efba20479172c6923df78b0caee4eb8f",
+      "sourceFields": [
+        "FID",
+        "OBJECTID",
+        "Location",
+        "Monument",
+        "Northing",
+        "Easting",
+        "Elevation",
+        "Year",
+        "Day",
+        "COL_DATE",
+        "BEACH",
+        "TRAN_ID",
+        "DFM",
+        "DFCP",
+        "POINT_X",
+        "POINT_Y",
+        "STATIC_ID"
+      ],
+      "collectionDates": [
+        "2016-12-02"
+      ],
+      "pointCount": 112870,
+      "transectCount": 31,
+      "surveyTypes": {
+        "unspecified": 112870
+      },
+      "horizontalCrs": {
+        "name": "NAD83(2011) / South Carolina (international feet)",
+        "epsg": 6570,
+        "identification": "Identified from the supplied .prj parameters",
+        "horizontalUnit": "international foot",
+        "horizontalUnitToMetres": 0.3048,
+        "sourceWkt": "PROJCS[\"NAD_1983_2011_StatePlane_South_Carolina_FIPS_3900_Ft_Intl\",GEOGCS[\"GCS_NAD_1983_2011\",DATUM[\"D_NAD_1983_2011\",SPHEROID[\"GRS_1980\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic\"],PARAMETER[\"False_Easting\",2000000.0],PARAMETER[\"False_Northing\",0.0],PARAMETER[\"Central_Meridian\",-81.0],PARAMETER[\"Standard_Parallel_1\",32.5],PARAMETER[\"Standard_Parallel_2\",34.83333333333334],PARAMETER[\"Latitude_Of_Origin\",31.83333333333333],UNIT[\"Foot\",0.3048]]",
+        "geographicColumns": "Source POINT_X/POINT_Y longitude/latitude in degrees; their geographic CRS is not separately asserted by this importer"
+      },
+      "verticalReference": {
+        "datum": "NAVD88",
+        "status": "explicit-source-metadata",
+        "geoidModel": "2012A CONUS",
+        "elevationUnit": "foot",
+        "unitEvidence": "International Survey feet in this year's XML",
+        "evidence": [
+          {
+            "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2016.shp.xml",
+            "text": "The vertical datum for all data is NAVD88 using the Geoid model 2012A CONUS with units in International Survey feet. The Ellipsoid used is WGS-84 and the projection is Lambert Conformal Conic"
+          },
+          {
+            "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2016.txt.xml",
+            "text": "The vertical datum for all data is NAVD88 using the Geoid model 2012A CONUS with units in International Survey feet. The Ellipsoid used is WGS-84 and the projection is Lambert Conformal Conic"
+          }
+        ],
+        "lineageHints": [],
+        "transformationApplied": false
+      },
+      "sourceMetadata": [
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2016.prj",
+          "sha256": "bbfb4810c1d18331cd5be562b07558a6fcb22cf8553c0d6887d83e1a43ddbc39",
+          "bytes": 525
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2016.shp.xml",
+          "sha256": "6fd4a300ebf21f0cf07a412c1bf826276ccf9354222577dda154e82cb87b21e7",
+          "bytes": 45023
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2016.txt.xml",
+          "sha256": "a167a03d83d4c6e50ee1a3c705991cd4a0f7b5df173962d9e83de52a0c06f37d",
+          "bytes": 45023
+        }
+      ],
+      "warnings": [],
+      "normalizedFile": "scdes-folly-export-2016.csv.gz",
+      "normalizedSha256": "0b45768f9ce41affa7bafb8db7328438d271483894ce175bce7645a0e76204be",
+      "normalizedBytes": 5341225
+    },
+    {
+      "surveyId": "scdes-folly-export-2017",
+      "sourceFile": "FOLLY_BEACH/Folly_Beach_2017.csv",
+      "sourceFileYear": 2017,
+      "sourceCsvSha256": "b978940b0bd9f7d3b05927bdda38cfcf76ed88600562eac3d1a04fb3db2d7eac",
+      "sourceFields": [
+        "LOCATION",
+        "MONUMENT",
+        "NORTHING",
+        "EASTING",
+        "DBL",
+        "YEAR",
+        "DAY",
+        "COL_DATE",
+        "BEACH",
+        "TRAN_ID",
+        "DFM",
+        "DFCP",
+        "POINT_X",
+        "POINT_Y",
+        "STATIC_ID",
+        "Elevation"
+      ],
+      "collectionDates": [
+        "2017-12-17"
+      ],
+      "pointCount": 102119,
+      "transectCount": 30,
+      "surveyTypes": {
+        "unspecified": 102119
+      },
+      "horizontalCrs": {
+        "name": "NAD83(2011) / South Carolina (international feet)",
+        "epsg": 6570,
+        "identification": "Identified from the supplied .prj parameters",
+        "horizontalUnit": "international foot",
+        "horizontalUnitToMetres": 0.3048,
+        "sourceWkt": "PROJCS[\"NAD_1983_2011_StatePlane_South_Carolina_FIPS_3900_Ft_Intl\",GEOGCS[\"GCS_NAD_1983_2011\",DATUM[\"D_NAD_1983_2011\",SPHEROID[\"GRS_1980\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic\"],PARAMETER[\"False_Easting\",2000000.0],PARAMETER[\"False_Northing\",0.0],PARAMETER[\"Central_Meridian\",-81.0],PARAMETER[\"Standard_Parallel_1\",32.5],PARAMETER[\"Standard_Parallel_2\",34.83333333333334],PARAMETER[\"Latitude_Of_Origin\",31.83333333333333],UNIT[\"Foot\",0.3048]]",
+        "geographicColumns": "Source POINT_X/POINT_Y longitude/latitude in degrees; their geographic CRS is not separately asserted by this importer"
+      },
+      "verticalReference": {
+        "datum": null,
+        "status": "unconfirmed",
+        "geoidModel": null,
+        "elevationUnit": "foot",
+        "unitEvidence": "Feet are the BERM program's published profile units; this year's vertical units were not separately confirmed",
+        "evidence": [],
+        "lineageHints": [],
+        "transformationApplied": false
+      },
+      "sourceMetadata": [
+        {
+          "sourceFile": "FOLLY_BEACH/Folly_Beach_2017.prj",
+          "sha256": "bbfb4810c1d18331cd5be562b07558a6fcb22cf8553c0d6887d83e1a43ddbc39",
+          "bytes": 525
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/Folly_Beach_2017.shp.xml",
+          "sha256": "c6e9025a1a75e6a9588dd45a60e14f6df37fb8ebb3ed2999b7ff6c5e42372a8d",
+          "bytes": 97395
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/Folly_Beach_2017.txt.xml",
+          "sha256": "d91f84547dc963bbe3beb506a5141bfca1d6467c5af2868616c9ce3b95720f8b",
+          "bytes": 787
+        }
+      ],
+      "warnings": [
+        "Vertical datum unconfirmed: do not combine with water levels or another survey datum without confirmation."
+      ],
+      "normalizedFile": "scdes-folly-export-2017.csv.gz",
+      "normalizedSha256": "32be0246268674e66e5ce4388cf9d31bb64e97999b4ebe623548c5a60f4f1f56",
+      "normalizedBytes": 4456221
+    },
+    {
+      "surveyId": "scdes-folly-export-2018",
+      "sourceFile": "FOLLY_BEACH/Folly_Beach_2018.csv",
+      "sourceFileYear": 2018,
+      "sourceCsvSha256": "8be2563d872e4df4fafa5bc766829546aac2738198169dbb37eae1240a2054f1",
+      "sourceFields": [
+        "Location",
+        "Monument",
+        "Northing",
+        "Easting",
+        "Elevation",
+        "Year",
+        "Day",
+        "TRAN_ID",
+        "DFM",
+        "DFCP",
+        "POINT_X",
+        "POINT_Y",
+        "STATIC_ID",
+        "COL_DATE",
+        "BEACH"
+      ],
+      "collectionDates": [
+        "2018-11-28"
+      ],
+      "pointCount": 118718,
+      "transectCount": 31,
+      "surveyTypes": {
+        "unspecified": 118718
+      },
+      "horizontalCrs": {
+        "name": "NAD83(2011) / South Carolina (international feet)",
+        "epsg": 6570,
+        "identification": "Identified from the supplied .prj parameters",
+        "horizontalUnit": "international foot",
+        "horizontalUnitToMetres": 0.3048,
+        "sourceWkt": "PROJCS[\"NAD_1983_2011_StatePlane_South_Carolina_FIPS_3900_Ft_Intl\",GEOGCS[\"GCS_NAD_1983_2011\",DATUM[\"D_NAD_1983_2011\",SPHEROID[\"GRS_1980\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic\"],PARAMETER[\"False_Easting\",2000000.0],PARAMETER[\"False_Northing\",0.0],PARAMETER[\"Central_Meridian\",-81.0],PARAMETER[\"Standard_Parallel_1\",32.5],PARAMETER[\"Standard_Parallel_2\",34.83333333333334],PARAMETER[\"Latitude_Of_Origin\",31.83333333333333],UNIT[\"Foot\",0.3048]]",
+        "geographicColumns": "Source POINT_X/POINT_Y longitude/latitude in degrees; their geographic CRS is not separately asserted by this importer"
+      },
+      "verticalReference": {
+        "datum": null,
+        "status": "unconfirmed",
+        "geoidModel": null,
+        "elevationUnit": "foot",
+        "unitEvidence": "Feet are the BERM program's published profile units; this year's vertical units were not separately confirmed",
+        "evidence": [],
+        "lineageHints": [],
+        "transformationApplied": false
+      },
+      "sourceMetadata": [
+        {
+          "sourceFile": "FOLLY_BEACH/Folly_Beach_2018.prj",
+          "sha256": "bbfb4810c1d18331cd5be562b07558a6fcb22cf8553c0d6887d83e1a43ddbc39",
+          "bytes": 525
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/Folly_Beach_2018.shp.xml",
+          "sha256": "202e2d77af6519e293194c262df2e592d3961bac80644b4051f0f1b6e069cadb",
+          "bytes": 19066
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/Folly_Beach_2018.txt.xml",
+          "sha256": "fb400d6e5fd90024c76a35bee8d13d57cbc47ac4aec5e97d8565cd5fe18b7379",
+          "bytes": 787
+        }
+      ],
+      "warnings": [
+        "Vertical datum unconfirmed: do not combine with water levels or another survey datum without confirmation."
+      ],
+      "normalizedFile": "scdes-folly-export-2018.csv.gz",
+      "normalizedSha256": "ab47b9097d99024f894b3bfc80ff47e50a2338b84f3bfc734d94bb761f3de661",
+      "normalizedBytes": 4725523
+    },
+    {
+      "surveyId": "scdes-folly-export-2019",
+      "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2019.csv",
+      "sourceFileYear": 2019,
+      "sourceCsvSha256": "23c0c20ea31a7919b2041846971b39871328dd530dbf8560c1ad892fc9856d70",
+      "sourceFields": [
+        "OBJECTID",
+        "Location",
+        "Monument",
+        "Northing",
+        "Easting",
+        "Elevation",
+        "Year",
+        "Day",
+        "TRAN_ID",
+        "DFM",
+        "POINT_X",
+        "POINT_Y",
+        "STATIC_ID",
+        "COL_DATE",
+        "BEACH",
+        "SURVEY",
+        "DFCP"
+      ],
+      "collectionDates": [
+        "2019-11-22"
+      ],
+      "pointCount": 54694,
+      "transectCount": 31,
+      "surveyTypes": {
+        "Bathy": 52607,
+        "Topo": 2087
+      },
+      "horizontalCrs": {
+        "name": "NAD83(2011) / South Carolina (international feet)",
+        "epsg": 6570,
+        "identification": "Identified from the supplied .prj parameters",
+        "horizontalUnit": "international foot",
+        "horizontalUnitToMetres": 0.3048,
+        "sourceWkt": "PROJCS[\"NAD_1983_2011_StatePlane_South_Carolina_FIPS_3900_Ft_Intl\",GEOGCS[\"GCS_NAD_1983_2011\",DATUM[\"D_NAD_1983_2011\",SPHEROID[\"GRS_1980\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic\"],PARAMETER[\"False_Easting\",2000000.0],PARAMETER[\"False_Northing\",0.0],PARAMETER[\"Central_Meridian\",-81.0],PARAMETER[\"Standard_Parallel_1\",32.5],PARAMETER[\"Standard_Parallel_2\",34.83333333333334],PARAMETER[\"Latitude_Of_Origin\",31.83333333333333],UNIT[\"Foot\",0.3048]]",
+        "geographicColumns": "Source POINT_X/POINT_Y longitude/latitude in degrees; their geographic CRS is not separately asserted by this importer"
+      },
+      "verticalReference": {
+        "datum": null,
+        "status": "unconfirmed",
+        "geoidModel": null,
+        "elevationUnit": "foot",
+        "unitEvidence": "Feet are the BERM program's published profile units; this year's vertical units were not separately confirmed",
+        "evidence": [],
+        "lineageHints": [],
+        "transformationApplied": false
+      },
+      "sourceMetadata": [
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2019.prj",
+          "sha256": "bbfb4810c1d18331cd5be562b07558a6fcb22cf8553c0d6887d83e1a43ddbc39",
+          "bytes": 525
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2019.shp.xml",
+          "sha256": "06d29566ebb65c3387b9cd1283566bf6646fe2134def0ed2d114bec075684bb3",
+          "bytes": 22774
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2019.txt.xml",
+          "sha256": "9b7d081fe5bd12300d838f15d611f36f7a0bbc91a40f408aa64f568508b5084b",
+          "bytes": 22774
+        }
+      ],
+      "warnings": [
+        "Vertical datum unconfirmed: do not combine with water levels or another survey datum without confirmation."
+      ],
+      "normalizedFile": "scdes-folly-export-2019.csv.gz",
+      "normalizedSha256": "108cb10fc21728b6bfaf597f48c8ec30e7d729f9d4d5eb4f2817decaadf94d3f",
+      "normalizedBytes": 2919393
+    },
+    {
+      "surveyId": "scdes-folly-export-2020",
+      "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2020.csv",
+      "sourceFileYear": 2020,
+      "sourceCsvSha256": "73f22a1acbe55b8c639cb9ade38c6f76a0b7d7741b3853c985d504fa05ab4e94",
+      "sourceFields": [
+        "OBJECTID",
+        "Location",
+        "Monument",
+        "Northing",
+        "Easting",
+        "Elevation",
+        "Year",
+        "Day",
+        "TRAN_ID",
+        "DFM",
+        "POINT_X",
+        "POINT_Y",
+        "STATIC_ID",
+        "COL_DATE",
+        "BEACH",
+        "SURVEY",
+        "DFCP"
+      ],
+      "collectionDates": [
+        "2020-12-10"
+      ],
+      "pointCount": 53654,
+      "transectCount": 31,
+      "surveyTypes": {
+        "Bathy": 51192,
+        "Topo": 2462
+      },
+      "horizontalCrs": {
+        "name": "NAD83(2011) / South Carolina (international feet)",
+        "epsg": 6570,
+        "identification": "Identified from the supplied .prj parameters",
+        "horizontalUnit": "international foot",
+        "horizontalUnitToMetres": 0.3048,
+        "sourceWkt": "PROJCS[\"NAD_1983_2011_StatePlane_South_Carolina_FIPS_3900_Ft_Intl\",GEOGCS[\"GCS_NAD_1983_2011\",DATUM[\"D_NAD_1983_2011\",SPHEROID[\"GRS_1980\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic\"],PARAMETER[\"False_Easting\",2000000.0],PARAMETER[\"False_Northing\",0.0],PARAMETER[\"Central_Meridian\",-81.0],PARAMETER[\"Standard_Parallel_1\",32.5],PARAMETER[\"Standard_Parallel_2\",34.83333333333334],PARAMETER[\"Latitude_Of_Origin\",31.83333333333333],UNIT[\"Foot\",0.3048]]",
+        "geographicColumns": "Source POINT_X/POINT_Y longitude/latitude in degrees; their geographic CRS is not separately asserted by this importer"
+      },
+      "verticalReference": {
+        "datum": null,
+        "status": "unconfirmed",
+        "geoidModel": null,
+        "elevationUnit": "foot",
+        "unitEvidence": "Feet are the BERM program's published profile units; this year's vertical units were not separately confirmed",
+        "evidence": [],
+        "lineageHints": [],
+        "transformationApplied": false
+      },
+      "sourceMetadata": [
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2020.prj",
+          "sha256": "bbfb4810c1d18331cd5be562b07558a6fcb22cf8553c0d6887d83e1a43ddbc39",
+          "bytes": 525
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2020.csv.xml",
+          "sha256": "fa3bd3f397acc1759349dde2ceb9565d9db9089bfea263012905be45c7eb75a3",
+          "bytes": 26539
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2020.shp.xml",
+          "sha256": "d4f7fb8c07eb81643df309b503045c4b8d8ed787fc3845ace3508f85974812ca",
+          "bytes": 26539
+        }
+      ],
+      "warnings": [
+        "Vertical datum unconfirmed: do not combine with water levels or another survey datum without confirmation."
+      ],
+      "normalizedFile": "scdes-folly-export-2020.csv.gz",
+      "normalizedSha256": "e25f250ef4f4fc4cf50a94bb1a97a37dd994d14d023eb43fc569027182fea5bd",
+      "normalizedBytes": 2980899
+    },
+    {
+      "surveyId": "scdes-folly-export-2021",
+      "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2021.csv",
+      "sourceFileYear": 2021,
+      "sourceCsvSha256": "61cfb671ada98b9143eb8177b915c26883207ad67f03dd4ad4effd6347e390e9",
+      "sourceFields": [
+        "OBJECTID",
+        "Location",
+        "Monument",
+        "Northing",
+        "Easting",
+        "Elevation",
+        "Year",
+        "Day",
+        "TRAN_ID",
+        "DFM",
+        "STATIC_ID",
+        "COL_DATE",
+        "BEACH",
+        "SURVEY",
+        "DFCP",
+        "POINT_X",
+        "POINT_Y"
+      ],
+      "collectionDates": [
+        "2021-11-17"
+      ],
+      "pointCount": 57003,
+      "transectCount": 31,
+      "surveyTypes": {
+        "Bathy": 54019,
+        "Topo": 2984
+      },
+      "horizontalCrs": {
+        "name": "NAD83(2011) / South Carolina (international feet)",
+        "epsg": 6570,
+        "identification": "Identified from the supplied .prj parameters",
+        "horizontalUnit": "international foot",
+        "horizontalUnitToMetres": 0.3048,
+        "sourceWkt": "PROJCS[\"NAD_1983_2011_StatePlane_South_Carolina_FIPS_3900_Ft_Intl\",GEOGCS[\"GCS_NAD_1983_2011\",DATUM[\"D_NAD_1983_2011\",SPHEROID[\"GRS_1980\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic\"],PARAMETER[\"False_Easting\",2000000.0],PARAMETER[\"False_Northing\",0.0],PARAMETER[\"Central_Meridian\",-81.0],PARAMETER[\"Standard_Parallel_1\",32.5],PARAMETER[\"Standard_Parallel_2\",34.83333333333334],PARAMETER[\"Latitude_Of_Origin\",31.83333333333333],UNIT[\"Foot\",0.3048]]",
+        "geographicColumns": "Source POINT_X/POINT_Y longitude/latitude in degrees; their geographic CRS is not separately asserted by this importer"
+      },
+      "verticalReference": {
+        "datum": null,
+        "status": "unconfirmed",
+        "geoidModel": null,
+        "elevationUnit": "foot",
+        "unitEvidence": "Feet are the BERM program's published profile units; this year's vertical units were not separately confirmed",
+        "evidence": [],
+        "lineageHints": [
+          {
+            "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2021.csv.xml",
+            "text": "A Folly source filename in processing lineage mentions NAVD88; no explicit vertical-datum statement was found."
+          },
+          {
+            "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2021.shp.xml",
+            "text": "A Folly source filename in processing lineage mentions NAVD88; no explicit vertical-datum statement was found."
+          }
+        ],
+        "transformationApplied": false
+      },
+      "sourceMetadata": [
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2021.prj",
+          "sha256": "bbfb4810c1d18331cd5be562b07558a6fcb22cf8553c0d6887d83e1a43ddbc39",
+          "bytes": 525
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2021.csv.xml",
+          "sha256": "427d5c4654763fd761ab13090e8d70cc872737f32ab33bf3e0a398e1381a1ca2",
+          "bytes": 13335
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2021.shp.xml",
+          "sha256": "47caa9ced5d961ff1e7ba1480927191d38a210cb6110ee6eb2f24924a50ed404",
+          "bytes": 13335
+        }
+      ],
+      "warnings": [
+        "Vertical datum unconfirmed: do not combine with water levels or another survey datum without confirmation."
+      ],
+      "normalizedFile": "scdes-folly-export-2021.csv.gz",
+      "normalizedSha256": "ece829f72ba884a841dd1f76e03c445a9bbed5e9a87f791e8a7293e8a42cbdf2",
+      "normalizedBytes": 3161530
+    },
+    {
+      "surveyId": "scdes-folly-export-2022",
+      "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2022.csv",
+      "sourceFileYear": 2022,
+      "sourceCsvSha256": "5f6bcf4644a45e733eaec6fcc28d88fcb160c72abff8476f1447f60cf3616aca",
+      "sourceFields": [
+        "OBJECTID",
+        "Location",
+        "Monument",
+        "Northing",
+        "Easting",
+        "Elevation",
+        "Year",
+        "Day",
+        "TRAN_ID",
+        "DFM",
+        "STATIC_ID",
+        "COL_DATE",
+        "BEACH",
+        "SURVEY",
+        "DFCP",
+        "POINT_X",
+        "POINT_Y"
+      ],
+      "collectionDates": [
+        "2022-10-20"
+      ],
+      "pointCount": 61403,
+      "transectCount": 31,
+      "surveyTypes": {
+        "Bathy": 58666,
+        "Topo": 2737
+      },
+      "horizontalCrs": {
+        "name": "NAD83(2011) / South Carolina (international feet)",
+        "epsg": 6570,
+        "identification": "Identified from the supplied .prj parameters",
+        "horizontalUnit": "international foot",
+        "horizontalUnitToMetres": 0.3048,
+        "sourceWkt": "PROJCS[\"NAD_1983_2011_StatePlane_South_Carolina_FIPS_3900_Ft_Intl\",GEOGCS[\"GCS_NAD_1983_2011\",DATUM[\"D_NAD_1983_2011\",SPHEROID[\"GRS_1980\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic\"],PARAMETER[\"False_Easting\",2000000.0],PARAMETER[\"False_Northing\",0.0],PARAMETER[\"Central_Meridian\",-81.0],PARAMETER[\"Standard_Parallel_1\",32.5],PARAMETER[\"Standard_Parallel_2\",34.83333333333334],PARAMETER[\"Latitude_Of_Origin\",31.83333333333333],UNIT[\"Foot\",0.3048]]",
+        "geographicColumns": "Source POINT_X/POINT_Y longitude/latitude in degrees; their geographic CRS is not separately asserted by this importer"
+      },
+      "verticalReference": {
+        "datum": null,
+        "status": "unconfirmed",
+        "geoidModel": null,
+        "elevationUnit": "foot",
+        "unitEvidence": "Feet are the BERM program's published profile units; this year's vertical units were not separately confirmed",
+        "evidence": [],
+        "lineageHints": [],
+        "transformationApplied": false
+      },
+      "sourceMetadata": [
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2022.prj",
+          "sha256": "bbfb4810c1d18331cd5be562b07558a6fcb22cf8553c0d6887d83e1a43ddbc39",
+          "bytes": 525
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2022.csv.xml",
+          "sha256": "561b816b4d61835c30a00e2650885608eb74ae66b4fe0690029f5e4aa28d0fd1",
+          "bytes": 13350
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2022.shp.xml",
+          "sha256": "2acf925e3700a644f299da5e95eeeefe72d18a658636042bbc00294840987c1b",
+          "bytes": 13350
+        }
+      ],
+      "warnings": [
+        "Vertical datum unconfirmed: do not combine with water levels or another survey datum without confirmation."
+      ],
+      "normalizedFile": "scdes-folly-export-2022.csv.gz",
+      "normalizedSha256": "4fc5de4213fb093825007caec3744730b6c02f99c930cba4cf3eb24639103643",
+      "normalizedBytes": 3407425
+    },
+    {
+      "surveyId": "scdes-folly-export-2023",
+      "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2023.csv",
+      "sourceFileYear": 2023,
+      "sourceCsvSha256": "886d5ad274b25dc2bfc0d39911596f8a84fa4cd12b1568442bab2161fbec535a",
+      "sourceFields": [
+        "OBJECTID",
+        "Location",
+        "Monument",
+        "Northing",
+        "Easting",
+        "Elevation",
+        "Year",
+        "Day",
+        "TRAN_ID",
+        "DFM",
+        "STATIC_ID",
+        "COL_DATE",
+        "BEACH",
+        "SURVEY",
+        "DFCP",
+        "POINT_X",
+        "POINT_Y"
+      ],
+      "collectionDates": [
+        "2023-12-21"
+      ],
+      "pointCount": 62458,
+      "transectCount": 31,
+      "surveyTypes": {
+        "Bathy": 60027,
+        "Topo": 2431
+      },
+      "horizontalCrs": {
+        "name": "NAD83(2011) / South Carolina (international feet)",
+        "epsg": 6570,
+        "identification": "Identified from the supplied .prj parameters",
+        "horizontalUnit": "international foot",
+        "horizontalUnitToMetres": 0.3048,
+        "sourceWkt": "PROJCS[\"NAD_1983_2011_StatePlane_South_Carolina_FIPS_3900_Ft_Intl\",GEOGCS[\"GCS_NAD_1983_2011\",DATUM[\"D_NAD_1983_2011\",SPHEROID[\"GRS_1980\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic\"],PARAMETER[\"False_Easting\",2000000.0],PARAMETER[\"False_Northing\",0.0],PARAMETER[\"Central_Meridian\",-81.0],PARAMETER[\"Standard_Parallel_1\",32.5],PARAMETER[\"Standard_Parallel_2\",34.83333333333334],PARAMETER[\"Latitude_Of_Origin\",31.83333333333333],UNIT[\"Foot\",0.3048]]",
+        "geographicColumns": "Source POINT_X/POINT_Y longitude/latitude in degrees; their geographic CRS is not separately asserted by this importer"
+      },
+      "verticalReference": {
+        "datum": null,
+        "status": "unconfirmed",
+        "geoidModel": null,
+        "elevationUnit": "foot",
+        "unitEvidence": "Feet are the BERM program's published profile units; this year's vertical units were not separately confirmed",
+        "evidence": [],
+        "lineageHints": [],
+        "transformationApplied": false
+      },
+      "sourceMetadata": [
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2023.prj",
+          "sha256": "bbfb4810c1d18331cd5be562b07558a6fcb22cf8553c0d6887d83e1a43ddbc39",
+          "bytes": 525
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2023.csv.xml",
+          "sha256": "dd832198c360842d672d4cd789db128dd77af5a956968379dc49dfaafc916df7",
+          "bytes": 15790
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2023.shp.xml",
+          "sha256": "a85988ef3413e8bb8606f2518fea114a949b14e6476399e3db985387be314efd",
+          "bytes": 15790
+        }
+      ],
+      "warnings": [
+        "Vertical datum unconfirmed: do not combine with water levels or another survey datum without confirmation."
+      ],
+      "normalizedFile": "scdes-folly-export-2023.csv.gz",
+      "normalizedSha256": "63697aaaa0fe50026037d15ddcbc8ff509c8d8bac970cbab334561601c3937ee",
+      "normalizedBytes": 3462355
+    },
+    {
+      "surveyId": "scdes-folly-export-2024",
+      "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2024.csv",
+      "sourceFileYear": 2024,
+      "sourceCsvSha256": "0069e085affb84fdb8c092d81f118cc213dd96d39ca7c0a9281bb43b804284e6",
+      "sourceFields": [
+        "FID",
+        "OBJECTID",
+        "Location",
+        "Monument",
+        "Northing",
+        "Easting",
+        "Elevation",
+        "Year",
+        "Day",
+        "TRAN_ID",
+        "DFM",
+        "STATIC_ID",
+        "COL_DATE",
+        "BEACH",
+        "SURVEY",
+        "DFCP",
+        "POINT_X",
+        "POINT_Y"
+      ],
+      "collectionDates": [
+        "2024-11-20"
+      ],
+      "pointCount": 59976,
+      "transectCount": 31,
+      "surveyTypes": {
+        "Bathy": 57567,
+        "Topo": 2409
+      },
+      "horizontalCrs": {
+        "name": "NAD83(2011) / South Carolina (international feet)",
+        "epsg": 6570,
+        "identification": "Identified from the supplied .prj parameters",
+        "horizontalUnit": "international foot",
+        "horizontalUnitToMetres": 0.3048,
+        "sourceWkt": "PROJCS[\"NAD_1983_2011_StatePlane_South_Carolina_FIPS_3900_Ft_Intl\",GEOGCS[\"GCS_NAD_1983_2011\",DATUM[\"D_NAD_1983_2011\",SPHEROID[\"GRS_1980\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic\"],PARAMETER[\"False_Easting\",2000000.0],PARAMETER[\"False_Northing\",0.0],PARAMETER[\"Central_Meridian\",-81.0],PARAMETER[\"Standard_Parallel_1\",32.5],PARAMETER[\"Standard_Parallel_2\",34.83333333333334],PARAMETER[\"Latitude_Of_Origin\",31.83333333333333],UNIT[\"Foot\",0.3048]]",
+        "geographicColumns": "Source POINT_X/POINT_Y longitude/latitude in degrees; their geographic CRS is not separately asserted by this importer"
+      },
+      "verticalReference": {
+        "datum": null,
+        "status": "unconfirmed",
+        "geoidModel": null,
+        "elevationUnit": "foot",
+        "unitEvidence": "Feet are the BERM program's published profile units; this year's vertical units were not separately confirmed",
+        "evidence": [],
+        "lineageHints": [],
+        "transformationApplied": false
+      },
+      "sourceMetadata": [
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2024.prj",
+          "sha256": "bbfb4810c1d18331cd5be562b07558a6fcb22cf8553c0d6887d83e1a43ddbc39",
+          "bytes": 525
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2024.csv.xml",
+          "sha256": "29985dd64d6c96d11509b4a10faec5e22dc1aa0cafcb620b2c6988ac211a024a",
+          "bytes": 25537
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2024.shp.xml",
+          "sha256": "247ae476fa7090a1911d5c5b98708bb532dba1d347aafc40bf4c9ccedb4ec4ef",
+          "bytes": 25537
+        }
+      ],
+      "warnings": [
+        "Vertical datum unconfirmed: do not combine with water levels or another survey datum without confirmation."
+      ],
+      "normalizedFile": "scdes-folly-export-2024.csv.gz",
+      "normalizedSha256": "232f262635a4ea8d6be20b4ee4e01300c84d0a2b2f1fe10fbc83ead3e3336f13",
+      "normalizedBytes": 3153717
+    },
+    {
+      "surveyId": "scdes-folly-export-2025",
+      "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2025.csv",
+      "sourceFileYear": 2025,
+      "sourceCsvSha256": "ba9dcdd383b2e612568b646c16b679656faf59701d3db50d3b96bd0efb18e934",
+      "sourceFields": [
+        "OBJECTID",
+        "Location",
+        "Monument",
+        "Northing",
+        "Easting",
+        "Elevation",
+        "Year",
+        "Day",
+        "TRAN_ID",
+        "DFM",
+        "STATIC_ID",
+        "COL_DATE",
+        "BEACH",
+        "SURVEY",
+        "DFCP",
+        "POINT_X",
+        "POINT_Y"
+      ],
+      "collectionDates": [
+        "2025-11-13"
+      ],
+      "pointCount": 62811,
+      "transectCount": 31,
+      "surveyTypes": {
+        "Bathy": 58468,
+        "Topo": 4343
+      },
+      "horizontalCrs": {
+        "name": "NAD83(2011) / South Carolina (international feet)",
+        "epsg": 6570,
+        "identification": "Identified from the supplied .prj parameters",
+        "horizontalUnit": "international foot",
+        "horizontalUnitToMetres": 0.3048,
+        "sourceWkt": "PROJCS[\"NAD_1983_2011_StatePlane_South_Carolina_FIPS_3900_Ft_Intl\",GEOGCS[\"GCS_NAD_1983_2011\",DATUM[\"D_NAD_1983_2011\",SPHEROID[\"GRS_1980\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic\"],PARAMETER[\"False_Easting\",2000000.0],PARAMETER[\"False_Northing\",0.0],PARAMETER[\"Central_Meridian\",-81.0],PARAMETER[\"Standard_Parallel_1\",32.5],PARAMETER[\"Standard_Parallel_2\",34.83333333333334],PARAMETER[\"Latitude_Of_Origin\",31.83333333333333],UNIT[\"Foot\",0.3048]]",
+        "geographicColumns": "Source POINT_X/POINT_Y longitude/latitude in degrees; their geographic CRS is not separately asserted by this importer"
+      },
+      "verticalReference": {
+        "datum": null,
+        "status": "unconfirmed",
+        "geoidModel": null,
+        "elevationUnit": "foot",
+        "unitEvidence": "Feet are the BERM program's published profile units; this year's vertical units were not separately confirmed",
+        "evidence": [],
+        "lineageHints": [],
+        "transformationApplied": false
+      },
+      "sourceMetadata": [
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2025.prj",
+          "sha256": "bbfb4810c1d18331cd5be562b07558a6fcb22cf8553c0d6887d83e1a43ddbc39",
+          "bytes": 525
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2025.csv.xml",
+          "sha256": "34a9509e44fb096ed203e4839aa2ce21c6fb3ed815d4a2e7ee0f63fa5f07a353",
+          "bytes": 569
+        },
+        {
+          "sourceFile": "FOLLY_BEACH/FOLLY_BEACH_2025.shp.xml",
+          "sha256": "3470f751f5485c4715e15d6bc7042643c15a8c2827c5b841a68118564262e795",
+          "bytes": 57107
+        }
+      ],
+      "warnings": [
+        "Vertical datum unconfirmed: do not combine with water levels or another survey datum without confirmation."
+      ],
+      "normalizedFile": "scdes-folly-export-2025.csv.gz",
+      "normalizedSha256": "a4c5f9c5d9f866b4e57140d9033e8708f73ebaf93fbd407ddde0d9e8a163d26d",
+      "normalizedBytes": 3165345
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "kind": "captured-forecast-example",
+  "capturedOn": "2026-10-21",
+  "locationId": "pier",
+  "source": "follysurf.com /api/conditions; NOAA NWPS and Open-Meteo",
+  "note": "Inputs recorded during the score investigation. Issue/retrieval timestamps were not retained in this extract. This is a formula regression example, not an observation or a prospective validation record.",
+  "hours": [
+    {"t":1792929600,"nearshore":{"waveM":1.7052,"peakPeriodS":8.2},"wind":18.5,"windDir":25,"gust":28.9},
+    {"t":1792933200,"nearshore":{"waveM":1.6719,"peakPeriodS":8.239},"wind":18.8,"windDir":25,"gust":28.4}
+  ]
+}

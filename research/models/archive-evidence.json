@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "status": "descriptive-evidence-not-calibration",
+  "sourceCommit": "eb740e4f4d0b6f19e3493c0d59e75baa6626a5c1",
+  "sourcePath": "research/refinement/archive-feature-audit.json",
+  "sourceUrl": "https://github.com/neddonovan1-crypto/folly-surf/blob/eb740e4f4d0b6f19e3493c0d59e75baa6626a5c1/research/refinement/README.md",
+  "sourceSha256": "14536b41bc71307f245cf3e6d0ea2921e4648ac60c9508687ebd2d850be73f93",
+  "summary": {
+    "reports": 105,
+    "waveMatches": 101,
+    "providers": {
+      "mckevlins.blogspot.com": 1,
+      "www.oceansurfshop.com": 104
+    },
+    "locations": {
+      "pier": 10,
+      "washout": 65,
+      "folly-unspecified": 28,
+      "south-of-washout": 1,
+      "folly-pier": 1
+    },
+    "rideabilityTags": {
+      "fun": 18,
+      "longboardable": 10,
+      "flat-water-sup-preferred": 1,
+      "not-recommended": 1,
+      "weak": 15,
+      "rideable": 3,
+      "rideable-effortful": 1,
+      "meager": 1,
+      "poor": 1,
+      "rideable-drops": 1,
+      "marginal-longboardable": 1,
+      "decent": 1,
+      "barely-longboardable": 1
+    },
+    "funAndLongboardable": 1,
+    "weakAndLongboardable": 4,
+    "noRideabilityTag": 59,
+    "funWithOffshorePeriodBelow8s": 11,
+    "funWithOffshorePeriodAvailable": 17,
+    "groups": {
+      "all": {
+        "reports": 105,
+        "waveMatches": 101,
+        "offshoreHeightM": {
+          "n": 101,
+          "min": 0.5,
+          "median": 1.24,
+          "max": 3.17
+        },
+        "offshoreDominantPeriodS": {
+          "n": 101,
+          "min": 4.0,
+          "median": 7.0,
+          "max": 12.9
+        },
+        "offshoreAveragePeriodS": {
+          "n": 101,
+          "min": 3.82,
+          "median": 4.84,
+          "max": 7.33
+        },
+        "withFollyWind": 69,
+        "withCharlestonWind": 88
+      },
+      "fun": {
+        "reports": 18,
+        "waveMatches": 17,
+        "offshoreHeightM": {
+          "n": 17,
+          "min": 0.9,
+          "median": 1.59,
+          "max": 2.41
+        },
+        "offshoreDominantPeriodS": {
+          "n": 17,
+          "min": 5.26,
+          "median": 7.69,
+          "max": 12.12
+        },
+        "offshoreAveragePeriodS": {
+          "n": 17,
+          "min": 4.32,
+          "median": 5.11,
+          "max": 7.12
+        },
+        "withFollyWind": 10,
+        "withCharlestonWind": 16
+      },
+      "longboardable": {
+        "reports": 10,
+        "waveMatches": 9,
+        "offshoreHeightM": {
+          "n": 9,
+          "min": 0.57,
+          "median": 0.9,
+          "max": 1.53
+        },
+        "offshoreDominantPeriodS": {
+          "n": 9,
+          "min": 5.0,
+          "median": 7.69,
+          "max": 12.9
+        },
+        "offshoreAveragePeriodS": {
+          "n": 9,
+          "min": 4.32,
+          "median": 4.56,
+          "max": 4.97
+        },
+        "withFollyWind": 6,
+        "withCharlestonWind": 8
+      },
+      "weak": {
+        "reports": 15,
+        "waveMatches": 15,
+        "offshoreHeightM": {
+          "n": 15,
+          "min": 0.5,
+          "median": 0.89,
+          "max": 1.49
+        },
+        "offshoreDominantPeriodS": {
+          "n": 15,
+          "min": 4.0,
+          "median": 7.69,
+          "max": 9.09
+        },
+        "offshoreAveragePeriodS": {
+          "n": 15,
+          "min": 3.97,
+          "median": 4.4,
+          "max": 6.4
+        },
+        "withFollyWind": 8,
+        "withCharlestonWind": 11
+      },
+      "closeout": {
+        "reports": 6,
+        "waveMatches": 6,
+        "offshoreHeightM": {
+          "n": 6,
+          "min": 0.93,
+          "median": 1.0550000000000002,
+          "max": 1.38
+        },
+        "offshoreDominantPeriodS": {
+          "n": 6,
+          "min": 4.55,
+          "median": 8.01,
+          "max": 8.33
+        },
+        "offshoreAveragePeriodS": {
+          "n": 6,
+          "min": 4.02,
+          "median": 5.085,
+          "max": 7.33
+        },
+        "withFollyWind": 3,
+        "withCharlestonWind": 3
+      }
+    }
+  },
+  "inputSha256": {
+    "historical/archive/observations.json": "d91fe3d32d5f83d7167979faa11d1fb3c233a2ac992fcd926850f73703eb8cb5",
+    "historical/results/validated-matches.json": "1c237f2f119887df0dd6d16ce1e1fbff3409b5e4aacc5d67cff8a83c0fe641cf"
+  },
+  "limitations": [
+    "Overlapping groups, not independent samples.",
+    "Offshore measurements are not nearshore inputs or breaking-wave face heights.",
+    "No archival quality grades or numerical Index scores inferred.",
+    "Almost all timed reports are from one provider; adjacent dates can share a swell event.",
+    "Existing tags are exploratory annotations; conditional board advice needs source review before use as a target.",
+    "All archive records have been available during hypothesis selection; none is an untouched holdout."
+  ],
+  "candidateSource": "https://github.com/neddonovan1-crypto/folly-surf/blob/eb740e4f4d0b6f19e3493c0d59e75baa6626a5c1/research/refinement/candidate-curves.mjs",
+  "integration": "V3 adopts the exploratory smooth period plateau; size curve stays linear at small heights. The archive does not fit any coefficients, validate the plateau, or support the separate new gust weight."
+}

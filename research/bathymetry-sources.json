@@ -1,0 +1,57 @@
+{
+  "reviewedAt": "2026-10-21",
+  "status": "research-catalogue-with-normalized-profile-import-no-custom-wave-model",
+  "sources": [
+    {
+      "id": "scdes-berm",
+      "title": "SC DES Beach Erosion Research and Monitoring Explorer",
+      "url": "https://gis.des.sc.gov/bermexplorer/",
+      "kind": "beach and nearshore profiles",
+      "coverage": "Folly Beach is explicitly selectable",
+      "availability": "Official Folly ZIP imported into normalized offline research files: 925274 measured points across 12 exports and 371 survey/transect groups",
+      "latestSurveyDate": "2025-11-13",
+      "horizontalDatum": "NAD83(2011), South Carolina State Plane FIPS 3900, international feet (EPSG:6570)",
+      "verticalDatum": null,
+      "integrationStatus": "Normalized offline import implemented; manifests and compact sample retained in research/surveys. No runtime terrain or custom wave model integration",
+      "downloadUrl": "https://des.sc.gov/sites/des/files/Documents/GIS/FOLLY_BEACH.zip",
+      "verticalDatumNote": "Only 2015 and 2016 XML explicitly establish NAVD88 / Geoid12A; other years, including 2025, remain unconfirmed",
+      "latestSurveyPoints": 62811,
+      "latestSurveyTransects": 31,
+      "archiveSha256": "1a1edc05953e0580e2ce8857f699caa5f320cfa3d2312e19687b128e8121987f",
+      "dateQualityNote": "Use COL_DATE: the file named 2014 contains 2013-10-03 measurements"
+    },
+    {
+      "id": "noaa-ngs-2016-2017",
+      "title": "2016\u20132017 NOAA NGS Topobathy Lidar DEM: Coastal South Carolina",
+      "url": "https://coast.noaa.gov/htdata/raster2/elevation/NGS_SC_Topobathy_DEM_2016_8585/",
+      "metadataUrl": "https://coast.noaa.gov/htdata/raster2/elevation/NGS_SC_Topobathy_DEM_2016_8585/sc2016_ngs_topobathy_dem_m8585_met_forHumans.html",
+      "kind": "topobathymetric DEM GeoTIFF collection",
+      "surveyYears": [
+        2016,
+        2017
+      ],
+      "availability": "Official bulk index verified; no tiles downloaded",
+      "coverage": "Tile footprint intersection and valid submerged pixels at Folly must be checked",
+      "horizontalDatum": null,
+      "verticalDatum": null,
+      "integrationStatus": "Candidate historical background only; not current sandbar bathymetry"
+    },
+    {
+      "id": "folly-beach-plan-2021",
+      "title": "City of Folly Beach Local Comprehensive Beachfront Management Plan",
+      "url": "https://des.sc.gov/sites/des/files/media/document/OCRM_FollyBeachLCBMP2021.pdf",
+      "kind": "management plan and survey provenance",
+      "publicationYear": 2021,
+      "availability": "Official report identifies BERM, Coastal Carolina University and Elko profiles",
+      "integrationStatus": "Reference only, not machine-readable terrain"
+    },
+    {
+      "id": "city-beach-preservation",
+      "title": "City of Folly Beach \u2014 Beach Preservation",
+      "url": "https://cityoffollybeach.com/rules_regulations/hot_topic_beach_preservation.php",
+      "kind": "monitoring reports and nourishment history",
+      "availability": "Public project and report links",
+      "integrationStatus": "Use survey/nourishment dates when assessing terrain relevance"
+    }
+  ]
+}
